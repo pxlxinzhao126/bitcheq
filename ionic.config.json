@@ -1,0 +1,8 @@
+{
+  "name": "bitcheq",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "24496075"
+}
