@@ -11,34 +11,43 @@ import { UserService } from '../serivce/user.service';
 export class Tab2Page implements OnInit {
   address: any;
   user: any;
-  transaction: any;
+  transactions: any[];
   showAddress = false;
 
   constructor(private userService: UserService) {}
 
   ngOnInit() {
     this.userService.getUser().subscribe((user) => {
-      console.log('user', user);
       this.user = user;
+      this.pollTransaction();
     });
 
     this.userService.getAddress().subscribe((address) => {
       this.address = address;
-      this.pollTransaction();
     });
   }
 
   pollTransaction() {
-    if (this.address?.address) {
+    if (this.user?.username) {
       interval(5000)
         .pipe(
           startWith(0),
-          switchMap(() => this.userService.getTransactionByAddress(this.address.address))
+          switchMap(() => this.userService.getTransactionByOwner(this.user.username))
           )
-        .subscribe((res) => {
-          this.transaction = res;
+        .subscribe((res: any[]) => {
+          console.log('res', res);
+          if (this.transactions && this.transactions.length < res.length) {
+            this.updateBalance();
+          }
+          this.transactions = res;
         });
     }
+  }
+
+  updateBalance() {
+    this.userService.getUser().subscribe((user) => {
+      this.user = user;
+    });
   }
 
   toggleAddress() {

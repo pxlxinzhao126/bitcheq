@@ -41,7 +41,10 @@
     </ion-card-header>
 
     <ion-card-content>
-      <div *ngIf="transaction && transaction.amount_received > 0">Received {{transaction.amount_received }} </div>
+      <div *ngFor="let transaction of transactions">
+        <div *ngIf="transaction && transaction.amount_received > 0">Received {{transaction.amount_received }} </div>
+        <div *ngIf="transaction && transaction.amount_sent > 0">Sent {{transaction.amount_sent }} </div>
+      </div>
     </ion-card-content>
   </ion-card>
 
