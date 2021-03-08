@@ -7,12 +7,28 @@ const apiEndpoint = 'http://localhost:3000';
 export class UserService {
   constructor(private httpClient: HttpClient) {}
 
+  getTransactionByAddress(address: string) {
+    // "_id": "6045615650e90c36aa2f87c2",
+    // "network": "BTCTEST",
+    // "address": "2N6hMCvhsz1Jp2i3KbSEnuYPZauNbm7PgNa",
+    // "balance_change": 0.00136,
+    // "amount_sent": 0,
+    // "amount_received": 0.00136,
+    // "txid": "823a39157114bdc058e07c13761208a83a6839e6cbb92839c54dd99968278333",
+    // "confirmations": 1,
+    // "is_green": false,
+    // "status": "Completed",
+    // "__v": 0
+    return this.httpClient.get(`${apiEndpoint}/transactions?address=${address}`);
+  }
+
   getUser() {
     // btcBalance: 0.00136
     // createdDate: "2021-03-07T23:26:45.568Z"
     // username: "pp1"
     return this.httpClient.get(`${apiEndpoint}/users?username=pp1`);
   }
+
   getAddress() {
     // address: "2N6hMCvhsz1Jp2i3KbSEnuYPZauNbm7PgNa"
     // label: "pp1-1615159612622"

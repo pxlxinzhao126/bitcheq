@@ -13,9 +13,36 @@
     </ion-toolbar>
   </ion-header>
 
-  <h1>Welcome {{user?.username}}</h1>
-  <h3>Balance {{user?.btcBalance}}</h3>
-  <h4>BTC Address </h4>
-  <p>{{address?.address}}</p>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Welcome {{user?.username}}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      Balance {{user?.btcBalance}}
+    </ion-card-content>
+  </ion-card>
+
+  <div class="button-container">
+    <ion-button color="primary" expand="block" (click)="toggleAddress()">Receive</ion-button>
+  </div>
+
+  <ion-card *ngIf="showAddress">
+    <qrcode [qrdata]="address?.address" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+
+    <ion-card-content>
+      {{address?.address}}
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Transactions</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <div *ngIf="transaction && transaction.amount_received > 0">Received {{transaction.amount_received }} </div>
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>
