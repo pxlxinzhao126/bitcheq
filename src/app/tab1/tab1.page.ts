@@ -1,20 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import firebase from 'firebase/app';
-import 'firebase/analytics';
-import 'firebase/auth';
+import { FirebaseService } from '../serivce/firebase.service';
 
-const firebaseConfig = {
-  apiKey: 'AIzaSyBjCwaZ7w9FuBmR56uuF6o6V_pNSluiHoU',
-  authDomain: 'bitcheq.firebaseapp.com',
-  databaseURL: 'https://bitcheq-default-rtdb.firebaseio.com',
-  projectId: 'bitcheq',
-  storageBucket: 'bitcheq.appspot.com',
-  messagingSenderId: '1084343878879',
-  appId: '1:1084343878879:web:d16d614e928009801cd56a',
-  measurementId: 'G-SKZSQZ0WL0'
-};
-
-firebase.initializeApp(firebaseConfig);
 
 @Component({
   selector: 'app-tab1',
@@ -26,19 +12,25 @@ export class Tab1Page implements OnInit{
   password: string;
   // firebase: any;
 
-  constructor() {}
+  constructor(private firebaseService: FirebaseService) {}
 
   ngOnInit() {
     /* tslint:disable:no-string-literal */
     // this.firebase = window['firebase'];
   }
 
-  login() {
-    firebase.auth().signInWithEmailAndPassword('p@p.com', '123456')
-    .then((userCredential) => {
-      console.log('userCredential', userCredential);
-    })
-    .catch((error) => {
-    });
+  async login() {
+    if (this.email && this.password) {
+      try {
+        const user = await this.firebaseService.signInWithEmailAndPassword(this.email, this.password);
+        console.log('login success', user);
+      } catch (e) {
+        console.error('login error', e);
+      }
+    }
+  }
+
+  test() {
+    const res = this.firebaseService.getCurrentUser();
   }
 }
