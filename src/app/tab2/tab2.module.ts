@@ -7,7 +7,6 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 import { Tab2PageRoutingModule } from './tab2-routing.module';
 import { Tab2Page } from './tab2.page';
 
-
 @NgModule({
   imports: [
     IonicModule,
@@ -15,8 +14,8 @@ import { Tab2Page } from './tab2.page';
     FormsModule,
     ExploreContainerComponentModule,
     Tab2PageRoutingModule,
-    QRCodeModule
+    QRCodeModule,
   ],
-  declarations: [Tab2Page]
+  declarations: [Tab2Page],
 })
 export class Tab2PageModule {}

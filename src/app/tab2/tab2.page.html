@@ -1,8 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Home
-    </ion-title>
+    <ion-title> Home </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -18,21 +16,23 @@
       <ion-card-title>Welcome {{user?.username}}</ion-card-title>
     </ion-card-header>
 
-    <ion-card-content>
-      Balance {{user?.btcBalance}}
-    </ion-card-content>
+    <ion-card-content> Balance {{user?.btcBalance}} </ion-card-content>
   </ion-card>
 
   <div class="button-container">
-    <ion-button color="primary" expand="block" (click)="toggleAddress()">Receive</ion-button>
+    <ion-button color="primary" expand="block" (click)="toggleAddress()"
+      >Receive</ion-button
+    >
   </div>
 
   <ion-card *ngIf="showAddress">
-    <qrcode [qrdata]="address?.address" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+    <qrcode
+      [qrdata]="address?.address"
+      [width]="256"
+      [errorCorrectionLevel]="'M'"
+    ></qrcode>
 
-    <ion-card-content>
-      {{address?.address}}
-    </ion-card-content>
+    <ion-card-content> {{address?.address}} </ion-card-content>
   </ion-card>
 
   <ion-card>
@@ -42,10 +42,13 @@
 
     <ion-card-content>
       <div *ngFor="let transaction of transactions">
-        <div *ngIf="transaction && transaction.amount_received > 0">Received {{transaction.amount_received }} </div>
-        <div *ngIf="transaction && transaction.amount_sent > 0">Sent {{transaction.amount_sent }} </div>
+        <div *ngIf="transaction && transaction.amount_received > 0">
+          Received {{transaction.amount_received }}
+        </div>
+        <div *ngIf="transaction && transaction.amount_sent > 0">
+          Sent {{transaction.amount_sent }}
+        </div>
       </div>
     </ion-card-content>
   </ion-card>
-
 </ion-content>

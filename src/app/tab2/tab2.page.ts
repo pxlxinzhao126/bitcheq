@@ -6,7 +6,7 @@ import { UserService } from '../serivce/user.service';
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
-  styleUrls: ['tab2.page.scss']
+  styleUrls: ['tab2.page.scss'],
 })
 export class Tab2Page implements OnInit {
   address: any;
@@ -32,8 +32,10 @@ export class Tab2Page implements OnInit {
       interval(5000)
         .pipe(
           startWith(0),
-          switchMap(() => this.userService.getTransactionByOwner(this.user.username))
-          )
+          switchMap(() =>
+            this.userService.getTransactionByOwner(this.user.username),
+          ),
+        )
         .subscribe((res: any[]) => {
           console.log('res', res);
           if (this.transactions && this.transactions.length < res.length) {
@@ -53,5 +55,4 @@ export class Tab2Page implements OnInit {
   toggleAddress() {
     this.showAddress = !this.showAddress;
   }
-
 }

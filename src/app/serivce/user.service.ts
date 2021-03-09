@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 const apiEndpoint = 'http://localhost:3000';
 const user = 'KamiSan';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class UserService {
   constructor(private httpClient: HttpClient) {}
 
