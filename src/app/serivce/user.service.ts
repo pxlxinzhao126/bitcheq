@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-const apiEndpoint = 'http://localhost:3000';
+const apiEndpoint = 'https://localhost:3000';
 const user = 'KamiSan';
 
 @Injectable({ providedIn: 'root' })
