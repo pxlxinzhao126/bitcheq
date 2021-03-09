@@ -6,8 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['tab1.page.scss'],
 })
 export class Tab1Page implements OnInit{
+  email: string;
+  password: string;
+
   constructor() {}
 
   ngOnInit() {
+  }
+
+  login() {
+    console.log('email', this.email);
+    console.log('password', this.password);
   }
 }

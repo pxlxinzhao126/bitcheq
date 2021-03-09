@@ -22,8 +22,11 @@
     "@angular/router": "~11.2.0",
     "@capacitor/android": "^2.4.7",
     "@capacitor/core": "2.4.7",
+    "@ionic-native/firebase-authentication": "^5.31.1",
     "@ionic/angular": "^5.5.2",
     "angularx-qrcode": "^10.0.12",
+    "cordova-plugin-firebase-authentication": "^4.0.2",
+    "cordova-support-android-plugin": "^1.0.2",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
