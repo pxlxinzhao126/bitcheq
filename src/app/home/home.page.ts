@@ -19,11 +19,16 @@ export class HomePage implements OnInit {
   ngOnInit() {
     this.userService.getUser().subscribe((user) => {
       this.user = user;
+      console.log('user', user);
       this.pollTransaction();
     });
 
-    this.userService.getAddress().subscribe((address) => {
-      this.address = address;
+    this.userService.getAddress().subscribe((res) => {
+      /* tslint:disable:no-string-literal */
+      console.log('address', res);
+      this.address = res['data'].address;
+      console.log('address', this.address);
+
     });
   }
 
@@ -60,6 +65,10 @@ export class HomePage implements OnInit {
   }
 
   getBalance() {
-    return Math.round(this.user.btcBalance * 100000000) / 100000000;
+    if (this.user) {
+      return Math.round(this.user.btcBalance * 100000000) / 100000000;
+    } else {
+      return 0;
+    }
   }
 }
