@@ -1,28 +1,41 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title> Home </ion-title>
+    <ion-title> {{user?.username}} </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Home</ion-title>
+      <ion-title size="large"> {{user?.username}} </ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Welcome {{user?.username}}</ion-card-title>
-    </ion-card-header>
+  <div class="balance-container">
+    <ion-text color="medium">
+      <h5>Chequing balance</h5>
+    </ion-text>
 
-    <ion-card-content> Balance {{user?.btcBalance}} </ion-card-content>
-  </ion-card>
+    <ion-text color="dark">
+      <h1>{{getBalance()}} BTC</h1>
+    </ion-text>
+  </div>
 
   <div class="button-container">
-    <ion-button color="primary" expand="block" (click)="toggleAddress()"
-      >Receive</ion-button
-    >
+    <ion-button expand="block" color="primary" (click)="toggleAddress()">
+      <ion-icon slot="end" name="arrow-up-outline"></ion-icon>
+      Send
+    </ion-button>
+
+    <ion-button color="secondary">
+      <ion-icon slot="end" name="arrow-down-outline"></ion-icon>
+      Receive
+    </ion-button>
+    <ion-button color="light">
+      <ion-icon slot="end" name="cash-outline"></ion-icon>
+      Request
+    </ion-button>
+
   </div>
 
   <ion-card *ngIf="showAddress">

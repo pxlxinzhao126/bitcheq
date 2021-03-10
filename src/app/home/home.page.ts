@@ -38,7 +38,10 @@ export class HomePage implements OnInit {
         )
         .subscribe((transactions: any[]) => {
           console.log('transactions', transactions);
-          if (this.transactions && this.transactions.length < transactions.length) {
+          if (
+            this.transactions &&
+            this.transactions.length < transactions.length
+          ) {
             this.updateBalance();
           }
           this.transactions = transactions;
@@ -54,5 +57,9 @@ export class HomePage implements OnInit {
 
   toggleAddress() {
     this.showAddress = !this.showAddress;
+  }
+
+  getBalance() {
+    return Math.round(this.user.btcBalance * 100000000) / 100000000;
   }
 }

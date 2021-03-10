@@ -1,4 +1,3 @@
-
 import firebase from 'firebase/app';
 import 'firebase/analytics';
 import 'firebase/auth';
@@ -12,7 +11,7 @@ const firebaseConfig = {
   storageBucket: 'bitcheq.appspot.com',
   messagingSenderId: '1084343878879',
   appId: '1:1084343878879:web:d16d614e928009801cd56a',
-  measurementId: 'G-SKZSQZ0WL0'
+  measurementId: 'G-SKZSQZ0WL0',
 };
 
 firebase.initializeApp(firebaseConfig);

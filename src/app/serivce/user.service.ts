@@ -21,14 +21,18 @@ export class UserService {
     // "is_green": false,
     // "status": "Completed",
     // "__v": 0
-    return this.httpClient.get(`${environment.apiEndpoint}/transactions/owner/${owner}`);
+    return this.httpClient.get(
+      `${environment.apiEndpoint}/transactions/owner/${owner}`,
+    );
   }
 
   getUser() {
     // btcBalance: 0.00136
     // createdDate: "2021-03-07T23:26:45.568Z"
     // username: "pp1"
-    return this.httpClient.get(`${environment.apiEndpoint}/users?username=${user}`);
+    return this.httpClient.get(
+      `${environment.apiEndpoint}/users?username=${user}`,
+    );
   }
 
   getAddress() {
@@ -40,6 +44,8 @@ export class UserService {
     // user_id: 26
     // __v: 0
     // _id: "6045613d50e90c36aa2f87c1"
-    return this.httpClient.get(`${environment.apiEndpoint}/block/address?username=${user}`);
+    return this.httpClient.get(
+      `${environment.apiEndpoint}/block/address?username=${user}`,
+    );
   }
 }
