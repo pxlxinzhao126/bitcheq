@@ -4,11 +4,11 @@ import { startWith, switchMap } from 'rxjs/operators';
 import { UserService } from '../serivce/user.service';
 
 @Component({
-  selector: 'app-tab2',
-  templateUrl: 'tab2.page.html',
-  styleUrls: ['tab2.page.scss'],
+  selector: 'app-home',
+  templateUrl: 'home.page.html',
+  styleUrls: ['home.page.scss'],
 })
-export class Tab2Page implements OnInit {
+export class HomePage implements OnInit {
   address: any;
   user: any;
   transactions: any[];
@@ -36,12 +36,12 @@ export class Tab2Page implements OnInit {
             this.userService.getTransactionByOwner(this.user.username),
           ),
         )
-        .subscribe((res: any[]) => {
-          console.log('res', res);
-          if (this.transactions && this.transactions.length < res.length) {
+        .subscribe((transactions: any[]) => {
+          console.log('transactions', transactions);
+          if (this.transactions && this.transactions.length < transactions.length) {
             this.updateBalance();
           }
-          this.transactions = res;
+          this.transactions = transactions;
         });
     }
   }

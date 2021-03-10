@@ -3,19 +3,17 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { QRCodeModule } from 'angularx-qrcode';
-import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
-import { Tab2PageRoutingModule } from './tab2-routing.module';
-import { Tab2Page } from './tab2.page';
+import { HomePageRoutingModule } from './home-routing.module';
+import { HomePage } from './home.page';
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    ExploreContainerComponentModule,
-    Tab2PageRoutingModule,
+    HomePageRoutingModule,
     QRCodeModule,
   ],
-  declarations: [Tab2Page],
+  declarations: [HomePage],
 })
-export class Tab2PageModule {}
+export class HomeModule {}
