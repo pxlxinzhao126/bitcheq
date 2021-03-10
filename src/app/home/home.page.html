@@ -26,11 +26,17 @@
   </div>
 
   <ion-card *ngIf="showAddress">
-    <qrcode
-      [qrdata]="address?.address"
-      [width]="256"
-      [errorCorrectionLevel]="'M'"
-    ></qrcode>
+    <div *ngIf="address?.address">
+      <qrcode
+        [qrdata]="address?.address"
+        [width]="256"
+        [errorCorrectionLevel]="'M'"
+      ></qrcode>
+    </div>
+
+    <div *ngIf="!address?.address">
+      <ion-card-content> Unable to fetch address </ion-card-content>
+    </div>
 
     <ion-card-content> {{address?.address}} </ion-card-content>
   </ion-card>
