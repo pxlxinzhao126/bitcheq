@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { Tab1PageRoutingModule } from './tab1-routing.module';
-import { Tab1Page } from './tab1.page';
+import { LoginPageRoutingModule } from './login-routing.module';
+import { LoginPage } from './login.page';
 
 
 @NgModule({
@@ -11,8 +11,8 @@ import { Tab1Page } from './tab1.page';
     IonicModule,
     CommonModule,
     FormsModule,
-    Tab1PageRoutingModule,
+    LoginPageRoutingModule,
   ],
-  declarations: [Tab1Page],
+  declarations: [LoginPage],
 })
-export class Tab1PageModule {}
+export class LoginPageModule {}
