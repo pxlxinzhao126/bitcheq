@@ -6,4 +6,34 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true"> works </ion-content>
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <ion-list-header>
+      <ion-text>
+        <h1>Transaction</h1>
+      </ion-text>
+    </ion-list-header>
+    <ion-item>
+      <ion-label>ID</ion-label>
+      <ion-note slot="end" color="dark">
+        <a href="#">{{shortId()}}</a>
+      </ion-note>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Status</ion-label>
+      <ion-note slot="end" color="success" *ngIf="tx?.confirmations > 4">Success</ion-note>
+      <ion-note slot="end" color="medium" *ngIf="tx?.confirmations < 4">Pending</ion-note>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Confirmations</ion-label>
+      <ion-note slot="end" color="dark">{{tx?.confirmations}}</ion-note>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Timestamp</ion-label>
+      <ion-note slot="end" color="dark">{{fullDate()}}</ion-note>
+    </ion-item>
+  </ion-list>
+</ion-content>
