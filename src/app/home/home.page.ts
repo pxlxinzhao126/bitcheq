@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import * as moment from 'moment';
 import { interval } from 'rxjs';
 import { startWith, switchMap } from 'rxjs/operators';
 import { UserService } from '../serivce/user.service';
-import * as moment from 'moment';
+import { TransactionService } from '../transaction/transaction.service';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +17,11 @@ export class HomePage implements OnInit {
   transactions: any[];
   showAddress = false;
 
-  constructor(private userService: UserService) {}
+  constructor(
+      private userService: UserService,
+      private router: Router,
+      private transactionService: TransactionService
+    ) {}
 
   ngOnInit() {
     this.userService.getUser().subscribe((user) => {
@@ -26,10 +32,7 @@ export class HomePage implements OnInit {
 
     this.userService.getAddress().subscribe((res) => {
       /* tslint:disable:no-string-literal */
-      console.log('address', res);
       this.address = res['data'].address;
-      console.log('address', this.address);
-
     });
   }
 
@@ -75,5 +78,10 @@ export class HomePage implements OnInit {
 
   getTransactionTime(tx) {
     return moment(tx.createdDate).fromNow();
+  }
+
+  async presentTransaction(tx) {
+    this.transactionService.setSelectedTx(tx);
+    this.router.navigate(['tx']);
   }
 }

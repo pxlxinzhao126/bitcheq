@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { QRCodeModule } from 'angularx-qrcode';
+import { TransactionModule } from '../transaction/transaction.module';
 import { HomePageRoutingModule } from './home-routing.module';
 import { HomePage } from './home.page';
 
@@ -13,6 +14,7 @@ import { HomePage } from './home.page';
     FormsModule,
     HomePageRoutingModule,
     QRCodeModule,
+    TransactionModule
   ],
   declarations: [HomePage],
 })
