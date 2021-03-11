@@ -16,7 +16,7 @@
     <ion-item>
       <ion-label>ID</ion-label>
       <ion-note slot="end" color="dark">
-        <a href="#">{{shortId()}}</a>
+        <a [href]="'https://sochain.com/tx/BTCTEST/' + tx?.txid">{{shortId()}}</a>
       </ion-note>
     </ion-item>
 
