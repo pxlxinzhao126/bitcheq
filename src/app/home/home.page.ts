@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { interval } from 'rxjs';
 import { startWith, switchMap } from 'rxjs/operators';
 import { UserService } from '../serivce/user.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-home',
@@ -34,7 +35,7 @@ export class HomePage implements OnInit {
 
   pollTransaction() {
     if (this.user?.username) {
-      interval(5000)
+      interval(500000)
         .pipe(
           startWith(0),
           switchMap(() =>
@@ -70,5 +71,9 @@ export class HomePage implements OnInit {
     } else {
       return 0;
     }
+  }
+
+  getTransactionTime(tx) {
+    return moment(tx.createdDate).fromNow();
   }
 }

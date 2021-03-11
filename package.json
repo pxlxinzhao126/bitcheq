@@ -27,7 +27,9 @@
     "angularx-qrcode": "^10.0.12",
     "cordova-plugin-firebase-authentication": "^4.0.2",
     "cordova-support-android-plugin": "^1.0.2",
+    "date-fns": "^2.19.0",
     "firebase": "^8.2.10",
+    "moment": "^2.29.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

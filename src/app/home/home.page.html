@@ -51,20 +51,31 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Transactions</ion-card-title>
-    </ion-card-header>
+  <div class="transaction-container">
+    <div class="transaction-title">
+      <ion-text color="dark" >
+        <h1>Transactions</h1>
+      </ion-text>
+    </div>
 
-    <ion-card-content>
-      <div *ngFor="let transaction of transactions">
-        <div *ngIf="transaction && transaction.amount_received > 0">
-          Received {{transaction.amount_received }}
+    <ion-list>
+      <ion-item *ngFor="let transaction of transactions" lines="none">
+        <div class="transaction-row">
+          <div class="transaction-date">
+            <ion-text>
+              {{getTransactionTime(transaction)}}
+            </ion-text>
+          </div>
+          <div class="transaction-amount">
+            <ion-text *ngIf="transaction && transaction.amount_received > 0" color="success">
+              <p>+{{transaction.amount_received }}</p>
+            </ion-text>
+            <ion-text *ngIf="transaction && transaction.amount_sent > 0" color="danger">
+              <p>-{{transaction.amount_sent }}</p>
+            </ion-text>
+          </div>
         </div>
-        <div *ngIf="transaction && transaction.amount_sent > 0">
-          Sent {{transaction.amount_sent }}
-        </div>
-      </div>
-    </ion-card-content>
-  </ion-card>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>
