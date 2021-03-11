@@ -5,6 +5,7 @@ import { interval } from 'rxjs';
 import { startWith, switchMap } from 'rxjs/operators';
 import { UserService } from '../serivce/user.service';
 import { TransactionService } from '../transaction/transaction.service';
+import { Clipboard } from '@ionic-native/clipboard/ngx';
 
 @Component({
   selector: 'app-home',
@@ -16,11 +17,13 @@ export class HomePage implements OnInit {
   user: any;
   transactions: any[];
   showAddress = false;
+  copied = false;
 
   constructor(
     private userService: UserService,
     private router: Router,
     private transactionService: TransactionService,
+    private clipboard: Clipboard
   ) {}
 
   ngOnInit() {
@@ -83,5 +86,15 @@ export class HomePage implements OnInit {
   async presentTransaction(tx) {
     this.transactionService.setSelectedTx(tx);
     this.router.navigate(['tx']);
+  }
+
+  copy() {
+    if ( this.address ) {
+      this.clipboard.copy(this.address);
+      this.copied = true;
+      setTimeout(() => {
+        this.copied = false;
+      }, 2000);
+    }
   }
 }
