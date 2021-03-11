@@ -10,7 +10,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.html\""
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.html\"",
+    "resources": "cordova-res ios && cordova-res android && node scripts/resources.js"
   },
   "private": true,
   "dependencies": {
@@ -23,9 +24,11 @@
     "@capacitor/android": "^2.4.7",
     "@capacitor/core": "2.4.7",
     "@ionic-native/firebase-authentication": "^5.31.1",
+    "@ionic-native/in-app-browser": "^5.31.1",
     "@ionic/angular": "^5.5.2",
     "angularx-qrcode": "^10.0.12",
     "cordova-plugin-firebase-authentication": "^4.0.2",
+    "cordova-plugin-inappbrowser": "^5.0.0",
     "cordova-support-android-plugin": "^1.0.2",
     "date-fns": "^2.19.0",
     "firebase": "^8.2.10",
@@ -46,6 +49,7 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0",
+    "cordova-res": "^0.15.3",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "~5.2.0",
