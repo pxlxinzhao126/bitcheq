@@ -6,6 +6,7 @@ import { startWith, switchMap } from 'rxjs/operators';
 import { UserService } from '../serivce/user.service';
 import { TransactionService } from '../transaction/transaction.service';
 import { Clipboard } from '@ionic-native/clipboard/ngx';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @Component({
   selector: 'app-home',
@@ -23,7 +24,8 @@ export class HomePage implements OnInit {
     private userService: UserService,
     private router: Router,
     private transactionService: TransactionService,
-    private clipboard: Clipboard
+    private clipboard: Clipboard,
+    private iab: InAppBrowser
   ) {}
 
   ngOnInit() {
@@ -96,5 +98,9 @@ export class HomePage implements OnInit {
         this.copied = false;
       }, 2000);
     }
+  }
+
+  requestBitcoin() {
+    this.iab.create('https://coinfaucet.eu/en/btc-testnet');
   }
 }
