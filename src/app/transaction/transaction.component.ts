@@ -1,7 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 import { TransactionService } from './transaction.service';
 
 @Component({
@@ -15,8 +14,8 @@ export class TransactionComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private transactionService: TransactionService
-  ) { }
+    private transactionService: TransactionService,
+  ) {}
 
   ngOnInit() {
     console.log(this.transactionService.getSelectedTx());
@@ -26,5 +25,4 @@ export class TransactionComponent implements OnInit {
     this.transactionService.setSelectedTx(null);
     this.router.navigate(['tabs', 'home']);
   }
-
 }

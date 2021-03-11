@@ -10,7 +10,9 @@ const routes: Routes = [
   {
     path: 'tx',
     loadChildren: () =>
-      import('./transaction/transaction.module').then((m) => m.TransactionModule),
+      import('./transaction/transaction.module').then(
+        (m) => m.TransactionModule,
+      ),
   },
 ];
 @NgModule({

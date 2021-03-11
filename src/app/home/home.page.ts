@@ -18,10 +18,10 @@ export class HomePage implements OnInit {
   showAddress = false;
 
   constructor(
-      private userService: UserService,
-      private router: Router,
-      private transactionService: TransactionService
-    ) {}
+    private userService: UserService,
+    private router: Router,
+    private transactionService: TransactionService,
+  ) {}
 
   ngOnInit() {
     this.userService.getUser().subscribe((user) => {

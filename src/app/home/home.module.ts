@@ -14,7 +14,7 @@ import { HomePage } from './home.page';
     FormsModule,
     HomePageRoutingModule,
     QRCodeModule,
-    TransactionModule
+    TransactionModule,
   ],
   declarations: [HomePage],
 })

@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TransactionService {
   private selectedTx: any;
 
-  constructor() { }
+  constructor() {}
 
   setSelectedTx(tx) {
     this.selectedTx = tx;

@@ -35,13 +35,12 @@
       <ion-icon slot="end" name="cash-outline"></ion-icon>
       Request
     </ion-button>
-
   </div>
 
   <ion-card *ngIf="showAddress && address">
     <ion-card-content>
       <div class="barcode-container">
-          <qrcode
+        <qrcode
           [qrdata]="address"
           [width]="256"
           [errorCorrectionLevel]="'M'"
@@ -53,7 +52,7 @@
 
   <div class="transaction-container">
     <div class="transaction-title">
-      <ion-text color="dark" >
+      <ion-text color="dark">
         <h1>Transactions</h1>
       </ion-text>
     </div>
@@ -62,15 +61,19 @@
       <ion-item *ngFor="let transaction of transactions" lines="none">
         <div class="transaction-row" (click)="presentTransaction(transaction)">
           <div class="transaction-date">
-            <ion-text>
-              {{getTransactionTime(transaction)}}
-            </ion-text>
+            <ion-text> {{getTransactionTime(transaction)}} </ion-text>
           </div>
           <div class="transaction-amount">
-            <ion-text *ngIf="transaction && transaction.amount_received > 0" color="success">
+            <ion-text
+              *ngIf="transaction && transaction.amount_received > 0"
+              color="success"
+            >
               <p>+{{transaction.amount_received }}</p>
             </ion-text>
-            <ion-text *ngIf="transaction && transaction.amount_sent > 0" color="danger">
+            <ion-text
+              *ngIf="transaction && transaction.amount_sent > 0"
+              color="danger"
+            >
               <p>-{{transaction.amount_sent }}</p>
             </ion-text>
           </div>
