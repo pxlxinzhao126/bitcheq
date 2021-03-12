@@ -10,7 +10,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { Clipboard } from '@ionic-native/clipboard/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
-
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -23,7 +22,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
   providers: [
     Clipboard,
     InAppBrowser,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   ],
   bootstrap: [AppComponent],
 })

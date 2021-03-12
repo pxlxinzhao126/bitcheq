@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { TransactionService } from './transaction.service';
 import * as moment from 'moment';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @Component({
   selector: 'app-transaction',
@@ -17,6 +18,7 @@ export class TransactionComponent implements OnInit {
   constructor(
     private router: Router,
     private transactionService: TransactionService,
+    private iab: InAppBrowser,
   ) {}
 
   ngOnInit() {
@@ -41,5 +43,12 @@ export class TransactionComponent implements OnInit {
   back() {
     this.transactionService.setSelectedTx(null);
     this.router.navigate(['tabs', 'home']);
+  }
+
+  viewTx(event) {
+    event.preventDefault();
+    const browser = this.iab.create(
+      `https://sochain.com/tx/BTCTEST/${this.tx?.txid}`,
+    );
   }
 }

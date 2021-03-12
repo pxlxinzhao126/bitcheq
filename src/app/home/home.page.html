@@ -46,8 +46,17 @@
         </ion-input>
 
         <div class="barcode-container-buttons">
-          <ion-button color="light" (click)="copy()" [disabled]="copied" size="small">
-            <ion-icon slot="icon-only" name="copy-outline" size="small"></ion-icon>
+          <ion-button
+            color="light"
+            (click)="copy()"
+            [disabled]="copied"
+            size="small"
+          >
+            <ion-icon
+              slot="icon-only"
+              name="copy-outline"
+              size="small"
+            ></ion-icon>
           </ion-button>
 
           <ion-button color="light" size="small" (click)="requestBitcoin()">

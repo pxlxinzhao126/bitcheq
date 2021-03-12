@@ -16,36 +16,33 @@
     <ion-item>
       <ion-label>ID</ion-label>
       <ion-note slot="end" color="dark">
-        <a [href]="'https://sochain.com/tx/BTCTEST/' + tx?.txid">{{shortId()}}</a>
+        <a (click)="viewTx($event)">{{ shortId() }}</a>
       </ion-note>
     </ion-item>
 
     <ion-item>
       <ion-label>Balance change</ion-label>
-      <ion-note slot="end"
-        *ngIf="tx?.amount_received > 0"
-        color="success"
-      >
-        <p>+{{tx?.amount_received }}</p>
+      <ion-note slot="end" *ngIf="tx?.amount_received > 0" color="success">
+        <p>+{{ tx?.amount_received }}</p>
       </ion-note>
-      <ion-note slot="end"
-        *ngIf="tx?.amount_sent > 0"
-        color="danger"
-      >
-        <p>-{{tx?.amount_sent }}</p>
+      <ion-note slot="end" *ngIf="tx?.amount_sent > 0" color="danger">
+        <p>-{{ tx?.amount_sent }}</p>
       </ion-note>
     </ion-item>
 
     <ion-item>
       <ion-label>Status</ion-label>
-      <ion-note slot="end" color="success" *ngIf="tx?.confirmations > 4">Success</ion-note>
-      <ion-note slot="end" color="medium" *ngIf="tx?.confirmations < 4">Pending</ion-note>
+      <ion-note slot="end" color="success" *ngIf="tx?.confirmations > 4"
+        >Success</ion-note
+      >
+      <ion-note slot="end" color="medium" *ngIf="tx?.confirmations < 4"
+        >Pending</ion-note
+      >
     </ion-item>
 
     <ion-item>
       <ion-label>Timestamp</ion-label>
-      <ion-note slot="end" color="dark">{{fullDate()}}</ion-note>
+      <ion-note slot="end" color="dark">{{ fullDate() }}</ion-note>
     </ion-item>
-
   </ion-list>
 </ion-content>

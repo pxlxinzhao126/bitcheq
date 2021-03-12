@@ -25,7 +25,7 @@ export class HomePage implements OnInit {
     private router: Router,
     private transactionService: TransactionService,
     private clipboard: Clipboard,
-    private iab: InAppBrowser
+    private iab: InAppBrowser,
   ) {}
 
   ngOnInit() {
@@ -91,7 +91,7 @@ export class HomePage implements OnInit {
   }
 
   copy() {
-    if ( this.address ) {
+    if (this.address) {
       this.clipboard.copy(this.address);
       this.copied = true;
       setTimeout(() => {
@@ -101,6 +101,11 @@ export class HomePage implements OnInit {
   }
 
   requestBitcoin() {
-    this.iab.create('https://coinfaucet.eu/en/btc-testnet');
+    const browser = this.iab.create('https://coinfaucet.eu/en/btc-testnet');
+    browser.on('loadstop').subscribe((event) => {
+      browser.executeScript({
+        code: `document.getElementById('address').value='123'`,
+      });
+    });
   }
 }
