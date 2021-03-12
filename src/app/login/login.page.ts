@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { FirebaseService } from '../serivce/firebase.service';
 
 @Component({
@@ -22,7 +23,10 @@ export class LoginPage {
     'auth/too-many-requests'
   ];
 
-  constructor(private firebaseService: FirebaseService) {}
+  constructor(
+    private firebaseService: FirebaseService,
+    private router: Router
+  ) {}
 
   switchState() {
     if (this.state === 'login') {
@@ -42,6 +46,7 @@ export class LoginPage {
           this.password,
         );
         console.log('login success', user);
+        this.router.navigate(['']);
       } catch (e) {
         console.error('login error', e);
         this.errorCode = e.code;
