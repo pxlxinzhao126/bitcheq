@@ -10,7 +10,8 @@
     },
     "GoogleAuth": {
       "scopes": [
-        "email"
+        "email",
+        "profile"
       ],
       "serverClientId": "1084343878879-jfmg4t1brq4jb6ivahabn9kf0dsar6bn.apps.googleusercontent.com",
       "forceCodeForRefreshToken": true
