@@ -20,12 +20,12 @@ export class LoginPage {
     'auth/email-already-in-use',
     'auth/wrong-password',
     'auth/user-not-found',
-    'auth/too-many-requests'
+    'auth/too-many-requests',
   ];
 
   constructor(
     private firebaseService: FirebaseService,
-    private router: Router
+    private router: Router,
   ) {}
 
   switchState() {
@@ -39,7 +39,12 @@ export class LoginPage {
 
   async login() {
     this.submitted = true;
-    if (this.email && this.isValidEmail() && this.password && this.password.length >= this.minLength) {
+    if (
+      this.email &&
+      this.isValidEmail() &&
+      this.password &&
+      this.password.length >= this.minLength
+    ) {
       try {
         const user = await this.firebaseService.signInWithEmailAndPassword(
           this.email,
@@ -56,7 +61,13 @@ export class LoginPage {
 
   async signUp() {
     this.submitted = true;
-    if (this.email && this.isValidEmail() && this.password && this.password.length >= this.minLength && this.password === this.password2) {
+    if (
+      this.email &&
+      this.isValidEmail() &&
+      this.password &&
+      this.password.length >= this.minLength &&
+      this.password === this.password2
+    ) {
       try {
         const userCredential = await this.firebaseService.createUserWithEmailAndPassword(
           this.email,
