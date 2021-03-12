@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { formatISO } from 'date-fns';
 import { FirebaseService } from '../serivce/firebase.service';
 
 @Component({
@@ -6,16 +7,20 @@ import { FirebaseService } from '../serivce/firebase.service';
   templateUrl: 'login.page.html',
   styleUrls: ['login.page.scss'],
 })
-export class LoginPage implements OnInit {
-  email: string;
-  password: string;
-  // firebase: any;
+export class LoginPage {
+  email = 'p@p.com';
+  password = '123456';
+  password2: string;
+  state = 'login';
 
   constructor(private firebaseService: FirebaseService) {}
 
-  ngOnInit() {
-    /* tslint:disable:no-string-literal */
-    // this.firebase = window['firebase'];
+  switchState() {
+    if (this.state === 'login') {
+      this.state = 'signUp';
+    } else if (this.state === 'signUp') {
+      this.state = 'login';
+    }
   }
 
   async login() {
@@ -32,7 +37,19 @@ export class LoginPage implements OnInit {
     }
   }
 
-  test() {
-    const res = this.firebaseService.getCurrentUser();
+  async signUp() {
+    if (this.email && this.password) {
+      if (this.password === this.password) {
+        try {
+          const userCredential = await this.firebaseService.createUserWithEmailAndPassword(
+            this.email,
+            this.password,
+          );
+          console.log('signUp success', userCredential.user);
+        } catch (e) {
+          console.error('login error', e);
+        }
+      }
+    }
   }
 }

@@ -29,4 +29,8 @@ export class FirebaseService {
   async signInWithEmailAndPassword(email: string, password: string) {
     return firebase.auth().signInWithEmailAndPassword(email, password);
   }
+
+  async createUserWithEmailAndPassword(email: string, password: string) {
+    return firebase.auth().createUserWithEmailAndPassword(email, password);
+  }
 }

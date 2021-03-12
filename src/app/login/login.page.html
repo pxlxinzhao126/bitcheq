@@ -5,18 +5,53 @@
         placeholder="Email"
         [(ngModel)]="email"
         name="email"
+        required
       ></ion-input>
       <ion-input
         placeholder="Password"
         [(ngModel)]="password"
         name="password"
         type="password"
+        required
       ></ion-input>
-      <ion-button color="primary" expand="block" (click)="login()"
+      <ion-input
+        *ngIf="state === 'signUp'"
+        placeholder="Confirm passowrd"
+        [(ngModel)]="password2"
+        name="password2"
+        type="password"
+      ></ion-input>
+      <ion-button
+        color="primary"
+        expand="block"
+        (click)="login()"
+        *ngIf="state === 'login'"
         >Log In</ion-button
       >
-      <ion-button color="secondary" expand="block" (click)="test()"
+      <ion-button
+        color="primary"
+        expand="block"
+        (click)="signUp()"
+        *ngIf="state === 'signUp'"
+        type="submit"
         >Sign Up</ion-button
+      >
+      <ion-button
+        color="secondary"
+        expand="block"
+        fill="outline"
+        *ngIf="state === 'login'"
+        (click)="switchState()"
+        type="submit"
+        >Register
+      </ion-button>
+      <ion-button
+        color="secondary"
+        expand="block"
+        fill="outline"
+        (click)="switchState()"
+        *ngIf="state === 'signUp'"
+        >Back</ion-button
       >
     </form>
   </div>
