@@ -102,10 +102,10 @@ export class HomePage implements OnInit {
 
   requestBitcoin() {
     const browser = this.iab.create('https://coinfaucet.eu/en/btc-testnet');
-    browser.on('loadstop').subscribe((event) => {
-      browser.executeScript({
-        code: `document.getElementById('address').value='123'`,
-      });
-    });
+    // browser.on('loadstop')?.subscribe((event) => {
+    //   browser.executeScript({
+    //     code: `document.getElementById('address').value=${this.address}`,
+    //   });
+    // });
   }
 }
