@@ -86,6 +86,16 @@ export class LoginPage {
     }
   }
 
+  async googleSignIn() {
+    try {
+      const result = await this.firebaseService.googleSignIn();
+      console.log('googleSignIn success', result);
+      this.router.navigate(['tabs', 'home']);
+    } catch (error) {
+      console.log('googleSignIn error', error);
+    }
+  }
+
   isValidEmail() {
     return (
       this.email?.match(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/g)?.length > 0

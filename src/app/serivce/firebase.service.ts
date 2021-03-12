@@ -16,6 +16,8 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
+const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
+
 @Injectable({ providedIn: 'root' })
 export class FirebaseService {
   getCurrentUser() {
@@ -32,5 +34,9 @@ export class FirebaseService {
 
   async createUserWithEmailAndPassword(email: string, password: string) {
     return firebase.auth().createUserWithEmailAndPassword(email, password);
+  }
+
+  async googleSignIn() {
+    return firebase.auth().signInWithPopup(googleAuthProvider);
   }
 }
