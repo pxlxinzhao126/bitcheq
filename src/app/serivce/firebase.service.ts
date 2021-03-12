@@ -20,8 +20,19 @@ const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 
 @Injectable({ providedIn: 'root' })
 export class FirebaseService {
+  private googleUser = null;
+
+  isGoogle() {
+    return !!this.googleUser;
+  }
+
   getCurrentUser() {
+    if (this.isGoogle()) { return this.googleUser; }
     return firebase.auth().currentUser;
+  }
+
+  setGoogleUser(user) {
+    this.googleUser = user;
   }
 
   async signOut() {

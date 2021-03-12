@@ -6,7 +6,9 @@ import { FirebaseService } from './firebase.service';
 export class AuthGuardService implements CanActivate {
   constructor(private firebaseService: FirebaseService, public router: Router) {}
   canActivate(): boolean {
-    if (!this.firebaseService.getCurrentUser()) {
+    const currentUser = this.firebaseService.getCurrentUser();
+    console.log('AuthGuardService currentUser', currentUser);
+    if (!currentUser) {
       this.router.navigate(['login']);
       return false;
     }

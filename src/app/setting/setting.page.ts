@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FirebaseService } from '../serivce/firebase.service';
+import { Plugins } from '@capacitor/core';
 
 @Component({
   selector: 'app-setting',
@@ -21,7 +22,11 @@ export class SettingPage implements OnInit {
   }
 
   async logout() {
-    await this.firebaseService.signOut();
+    if (this.firebaseService.isGoogle) {
+      await Plugins.GoogleAuth.signOut();
+    } else {
+      await this.firebaseService.signOut();
+    }
     this.router.navigate(['login']);
   }
 }

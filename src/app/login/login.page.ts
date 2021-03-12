@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FirebaseService } from '../serivce/firebase.service';
+import '@codetrix-studio/capacitor-google-auth';
+import { Plugins } from '@capacitor/core';
 
 @Component({
   selector: 'app-login',
@@ -88,8 +90,10 @@ export class LoginPage {
 
   async googleSignIn() {
     try {
-      const result = await this.firebaseService.googleSignIn();
-      console.log('googleSignIn success', result);
+      const user = await Plugins.GoogleAuth.signIn() as any;
+      console.log('googleSignIn success', user);
+      this.firebaseService.setGoogleUser(user);
+      console.log('navigating to home');
       this.router.navigate(['tabs', 'home']);
     } catch (error) {
       console.log('googleSignIn error', error);
