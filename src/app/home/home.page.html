@@ -75,6 +75,10 @@
       <ion-text color="dark">
         <h1>Transactions</h1>
       </ion-text>
+
+      <ion-text *ngIf="!transactions?.length" color="medium">
+        <p>No transaction yet</p>
+      </ion-text>
     </div>
 
     <ion-list>
