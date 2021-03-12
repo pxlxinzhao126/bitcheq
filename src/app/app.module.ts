@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { Clipboard } from '@ionic-native/clipboard/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { AuthGuardService } from './serivce/auth.guard';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,6 +21,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
     HttpClientModule,
   ],
   providers: [
+    AuthGuardService,
     Clipboard,
     InAppBrowser,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

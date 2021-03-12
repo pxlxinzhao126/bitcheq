@@ -51,7 +51,7 @@ export class LoginPage {
           this.password,
         );
         console.log('login success', user);
-        this.router.navigate(['']);
+        this.router.navigate(['tabs', 'home']);
       } catch (e) {
         console.error('login error', e);
         this.errorCode = e.code;
