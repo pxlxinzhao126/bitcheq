@@ -10,8 +10,10 @@ export class LoginPage {
   email = 'p@p.com';
   password = '123456';
   password2: string;
+  minLength = 6;
   state = 'login';
   submitted = false;
+  signUpSuccess = false;
   errorCode = null;
   errorTypes = [
     'auth/email-already-in-use',
@@ -28,13 +30,12 @@ export class LoginPage {
     } else if (this.state === 'signUp') {
       this.state = 'login';
     }
-    this.submitted = false;
-    this.errorCode = null;
+    this.clearError();
   }
 
   async login() {
     this.submitted = true;
-    if (this.email && this.password) {
+    if (this.email && this.isValidEmail() && this.password && this.password.length >= this.minLength) {
       try {
         const user = await this.firebaseService.signInWithEmailAndPassword(
           this.email,
@@ -50,13 +51,18 @@ export class LoginPage {
 
   async signUp() {
     this.submitted = true;
-    if (this.email && this.password && this.password === this.password2) {
+    if (this.email && this.isValidEmail() && this.password && this.password.length >= this.minLength && this.password === this.password2) {
       try {
         const userCredential = await this.firebaseService.createUserWithEmailAndPassword(
           this.email,
           this.password,
         );
         console.log('signUp success', userCredential.user);
+        this.signUpSuccess = true;
+        this.switchState();
+        setTimeout(() => {
+          this.signUpSuccess = false;
+        }, 5000);
       } catch (e) {
         console.error('login error', e);
         this.errorCode = e.code;
@@ -70,7 +76,8 @@ export class LoginPage {
     );
   }
 
-  clearErrorCode() {
+  clearError() {
+    this.submitted = false;
     this.errorCode = null;
   }
 

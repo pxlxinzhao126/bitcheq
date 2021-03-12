@@ -6,7 +6,7 @@
         [(ngModel)]="email"
         name="email"
         type="email"
-        (ionInput)="clearErrorCode()"
+        (ngModelChange)="clearError()"
         required
       ></ion-input>
       <ion-text color="danger" *ngIf="submitted && !email"
@@ -21,12 +21,12 @@
         [(ngModel)]="password"
         name="password"
         type="password"
-        (ionInput)="clearErrorCode()"
+        (ngModelChange)="clearError()"
         required
       ></ion-input>
       <ion-text
         color="danger"
-        *ngIf="submitted && (!password || password.length < 6)"
+        *ngIf="submitted && (!password || password.length < minLength)"
         >Password must be at least 6 characters</ion-text
       >
 
@@ -36,11 +36,11 @@
         [(ngModel)]="password2"
         name="password2"
         type="password"
-        (ionInput)="clearErrorCode()"
+        (ngModelChange)="clearError()"
       ></ion-input>
       <ion-text
         color="danger"
-        *ngIf="submitted && state === 'signUp' && password && password !== password2"
+        *ngIf="submitted && state === 'signUp' && password && password.length >= minLength && password !== password2"
         >Password does not match</ion-text
       >
       <ion-text
@@ -103,6 +103,12 @@
         (click)="switchState()"
         *ngIf="state === 'signUp'"
         >Back</ion-button
+      >
+
+      <ion-text
+        color="success"
+        *ngIf="signUpSuccess"
+        >Signed up successfully, please log in.</ion-text
       >
     </form>
   </div>
