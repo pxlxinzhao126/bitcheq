@@ -5,22 +5,73 @@
         placeholder="Email"
         [(ngModel)]="email"
         name="email"
+        type="email"
+        (ionInput)="clearErrorCode()"
         required
       ></ion-input>
+      <ion-text color="danger" *ngIf="submitted && !email"
+        >Email must not be empty</ion-text
+      >
+      <ion-text color="danger" *ngIf="submitted && email && !isValidEmail()"
+        >Email format is not valid</ion-text
+      >
+
       <ion-input
         placeholder="Password"
         [(ngModel)]="password"
         name="password"
         type="password"
+        (ionInput)="clearErrorCode()"
         required
       ></ion-input>
+      <ion-text
+        color="danger"
+        *ngIf="submitted && (!password || password.length < 6)"
+        >Password must be at least 6 characters</ion-text
+      >
+
       <ion-input
         *ngIf="state === 'signUp'"
         placeholder="Confirm passowrd"
         [(ngModel)]="password2"
         name="password2"
         type="password"
+        (ionInput)="clearErrorCode()"
       ></ion-input>
+      <ion-text
+        color="danger"
+        *ngIf="submitted && state === 'signUp' && password && password !== password2"
+        >Password does not match</ion-text
+      >
+      <ion-text
+        color="danger"
+        *ngIf="submitted && errorCode && errorCode === 'auth/email-already-in-use'"
+        >Email has already been registered</ion-text
+      >
+      <ion-text
+        color="danger"
+        *ngIf="submitted && errorCode && errorCode === 'auth/wrong-password'"
+        >Email and password do not match</ion-text
+      >
+      <ion-text
+        color="danger"
+        *ngIf="submitted && errorCode && errorCode === 'auth/user-not-found'"
+        >Email not found</ion-text
+      >
+      <ion-text
+        color="danger"
+        *ngIf="submitted && errorCode && errorCode === 'auth/too-many-requests'"
+      >
+        Access to this account has been temporarily disabled due to many failed
+        login attempts. You can immediately restore it by resetting your
+        password or you can try again later.
+      </ion-text>
+      <ion-text
+        color="danger"
+        *ngIf="submitted && errorCode && isUnknownError()"
+        >Encountered unknown error, please try again later.</ion-text
+      >
+
       <ion-button
         color="primary"
         expand="block"
