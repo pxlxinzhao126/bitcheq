@@ -32,11 +32,8 @@
 
     <ion-item>
       <ion-label>Status</ion-label>
-      <ion-note slot="end" color="success" *ngIf="tx?.confirmations >= 1"
-        >Confirmed</ion-note
-      >
-      <ion-note slot="end" color="medium" *ngIf="tx?.confirmations < 1"
-        >Pending</ion-note
+      <ion-note slot="end" color="{{tx?.confirmed ? 'success' : 'danger'}}"
+        >{{tx?.confirmed ? 'Confirmed' : 'Unconfirmed'}}</ion-note
       >
     </ion-item>
 
