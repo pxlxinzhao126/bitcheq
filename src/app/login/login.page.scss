@@ -7,6 +7,13 @@
 
   .landing-page-form {
     padding: 24px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  ion-input, ion-button {
+    width: 100%;
   }
 
   ion-text {
@@ -17,9 +24,17 @@
   .google-signIn {
     margin-top: 48px;
     background-image: url('../../assets/btn_google_signin_light_normal.png');
-    width: 62.5%;
-    padding-top: 15%;
-    margin-left: 18.75%;
+    width: 191px;
+    height: 46px;
     background-size: contain;
+  }
+
+  ion-item-divider {
+    margin-top: 48px;
+    text-align: center;
+
+    ion-label {
+      width: 100%;
+    }
   }
 }
