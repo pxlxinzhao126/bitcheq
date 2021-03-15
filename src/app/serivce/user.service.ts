@@ -15,20 +15,20 @@ export class UserService {
   }
 
   getUser() {
-    return this.httpClient.get(
-      `${environment.apiEndpoint}/users?username=${user}`,
-    ).toPromise();
+    return this.httpClient
+      .get(`${environment.apiEndpoint}/users?username=${user}`)
+      .toPromise();
   }
 
   getAddress() {
-    return this.httpClient.get(
-      `${environment.apiEndpoint}/block/address?username=${user}`,
-    ).toPromise();
+    return this.httpClient
+      .get(`${environment.apiEndpoint}/block/address?username=${user}`)
+      .toPromise();
   }
 
   confirm() {
-    return this.httpClient.post(
-      `${environment.apiEndpoint}/block/confirm`, { user },
-    ).toPromise();
+    return this.httpClient
+      .post(`${environment.apiEndpoint}/block/confirm`, { user })
+      .toPromise();
   }
 }

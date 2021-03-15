@@ -90,7 +90,7 @@ export class LoginPage {
 
   async googleSignIn() {
     try {
-      const user = await Plugins.GoogleAuth.signIn() as any;
+      const user = (await Plugins.GoogleAuth.signIn()) as any;
       console.log('googleSignIn success', user);
       this.firebaseService.setGoogleUser(user);
       console.log('navigating to home');

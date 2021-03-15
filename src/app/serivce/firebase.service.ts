@@ -27,7 +27,9 @@ export class FirebaseService {
   }
 
   getCurrentUser() {
-    if (this.isGoogle()) { return this.googleUser; }
+    if (this.isGoogle()) {
+      return this.googleUser;
+    }
     return firebase.auth().currentUser;
   }
 

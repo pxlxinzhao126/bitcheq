@@ -88,7 +88,10 @@
 
       <ion-list>
         <ion-item *ngFor="let transaction of transactions" lines="none">
-          <div class="transaction-row" (click)="presentTransaction(transaction)">
+          <div
+            class="transaction-row"
+            (click)="presentTransaction(transaction)"
+          >
             <div class="transaction-date">
               <ion-text> {{getTransactionTime(transaction)}} </ion-text>
             </div>
@@ -111,5 +114,4 @@
       </ion-list>
     </div>
   </div>
-
 </ion-content>

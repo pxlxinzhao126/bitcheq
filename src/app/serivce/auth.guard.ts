@@ -4,7 +4,10 @@ import { FirebaseService } from './firebase.service';
 
 @Injectable()
 export class AuthGuardService implements CanActivate {
-  constructor(private firebaseService: FirebaseService, public router: Router) {}
+  constructor(
+    private firebaseService: FirebaseService,
+    public router: Router,
+  ) {}
   canActivate(): boolean {
     const currentUser = this.firebaseService.getCurrentUser();
     console.log('AuthGuardService currentUser', currentUser);

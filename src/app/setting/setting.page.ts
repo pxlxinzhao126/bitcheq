@@ -13,7 +13,7 @@ export class SettingPage implements OnInit {
 
   constructor(
     private firebaseService: FirebaseService,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit() {

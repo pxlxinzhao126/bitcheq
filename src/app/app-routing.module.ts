@@ -9,7 +9,7 @@ const routes: Routes = [
       import('./transaction/transaction.module').then(
         (m) => m.TransactionModule,
       ),
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
     path: 'login',
@@ -20,7 +20,7 @@ const routes: Routes = [
     path: 'tabs',
     loadChildren: () =>
       import('./tabs/tabs.module').then((m) => m.TabsPageModule),
-      canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
     path: '',
@@ -29,7 +29,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'login'
+    redirectTo: 'login',
   },
 ];
 @NgModule({
