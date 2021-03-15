@@ -30,10 +30,10 @@ export class HomePage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.refresh();
+    this.refresh(null);
   }
 
-  async refresh() {
+  async refresh(event) {
     await this.userService.confirm();
 
     this.user = await this.userService.getUser();
@@ -41,10 +41,10 @@ export class HomePage implements OnInit {
     /* tslint:disable:no-string-literal */
     this.address = addressRes['data']?.address;
 
-    this.pollTransaction();
+    this.pollTransaction(event);
   }
 
-  pollTransaction() {
+  pollTransaction(event) {
     if (this.user?.username) {
       interval(500000)
         .pipe(
@@ -63,6 +63,7 @@ export class HomePage implements OnInit {
           }
           this.transactions = transactions;
           this.isLoading = false;
+          event?.target?.complete();
         });
     }
   }
