@@ -29,6 +29,12 @@ export class HomePage implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.refresh();
+  }
+
+  async refresh() {
+    await this.userService.confirm();
+
     this.userService.getUser().subscribe((user) => {
       this.user = user;
       console.log('user', user);
