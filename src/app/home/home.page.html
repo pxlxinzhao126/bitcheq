@@ -25,7 +25,7 @@
       <h1>{{isLoading ? 0 : getBalance()}} BTC</h1>
     </ion-text>
 
-    <div class="pending-balance">
+    <div class="pending-balance" *ngIf="!isLoading && user?.pendingBtcBalance">
       <ion-text color="medium">
         <small>{{user?.pendingBtcBalance ? 'Pending balance ' + user.pendingBtcBalance + ' BTC' : ''}}
         </small>
