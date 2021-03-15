@@ -30,7 +30,8 @@
         <small>{{user?.pendingBtcBalance ? 'Pending balance ' + user.pendingBtcBalance + ' BTC' : ''}}
         </small>
       </ion-text>
-      <ion-icon class="info-icon" color="medium" slot="end" name="alert-circle-outline"></ion-icon>
+      <ion-icon class="info-icon" color="medium" slot="end" name="alert-circle-outline"
+      (click)="presentPopover()"></ion-icon>
     </div>
 
   </div>

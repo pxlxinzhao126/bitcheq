@@ -6,6 +6,7 @@ import { QRCodeModule } from 'angularx-qrcode';
 import { TransactionModule } from '../transaction/transaction.module';
 import { HomePageRoutingModule } from './home-routing.module';
 import { HomePage } from './home.page';
+import { TooltipComponent } from './tooltip/tooltip.component';
 
 @NgModule({
   imports: [
@@ -16,6 +17,6 @@ import { HomePage } from './home.page';
     QRCodeModule,
     TransactionModule,
   ],
-  declarations: [HomePage],
+  declarations: [HomePage, TooltipComponent],
 })
 export class HomeModule {}

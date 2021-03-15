@@ -7,6 +7,8 @@ import { UserService } from '../serivce/user.service';
 import { TransactionService } from '../transaction/transaction.service';
 import { Clipboard } from '@ionic-native/clipboard/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { PopoverController } from '@ionic/angular';
+import { TooltipComponent } from './tooltip/tooltip.component';
 
 @Component({
   selector: 'app-home',
@@ -27,6 +29,7 @@ export class HomePage implements OnInit {
     private transactionService: TransactionService,
     private clipboard: Clipboard,
     private iab: InAppBrowser,
+    private popoverController: PopoverController
   ) {}
 
   ngOnInit() {
@@ -110,5 +113,14 @@ export class HomePage implements OnInit {
     //     code: `document.getElementById('address').value=${this.address}`,
     //   });
     // });
+  }
+
+  async presentPopover(ev: any) {
+    const popover = await this.popoverController.create({
+      component: TooltipComponent,
+      event: ev,
+      translucent: true
+    });
+    return await popover.present();
   }
 }
