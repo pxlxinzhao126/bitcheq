@@ -24,6 +24,15 @@
     <ion-text color="dark">
       <h1>{{isLoading ? 0 : getBalance()}} BTC</h1>
     </ion-text>
+
+    <div class="pending-balance">
+      <ion-text color="medium">
+        <small>{{user?.pendingBtcBalance ? 'Pending balance ' + user.pendingBtcBalance + ' BTC' : ''}}
+        </small>
+      </ion-text>
+      <ion-icon class="info-icon" color="medium" slot="end" name="alert-circle-outline"></ion-icon>
+    </div>
+
   </div>
 
   <div class="button-container">
