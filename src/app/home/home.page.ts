@@ -19,6 +19,7 @@ export class HomePage implements OnInit {
   transactions: any[];
   showAddress = false;
   copied = false;
+  isLoading = true;
 
   constructor(
     private userService: UserService,
@@ -35,16 +36,12 @@ export class HomePage implements OnInit {
   async refresh() {
     await this.userService.confirm();
 
-    this.userService.getUser().subscribe((user) => {
-      this.user = user;
-      console.log('user', user);
-      this.pollTransaction();
-    });
+    this.user = await this.userService.getUser();
+    const addressRes = await this.userService.getAddress();
+    /* tslint:disable:no-string-literal */
+    this.address = addressRes['data']?.address;
 
-    this.userService.getAddress().subscribe((res) => {
-      /* tslint:disable:no-string-literal */
-      this.address = res['data'].address;
-    });
+    this.pollTransaction();
   }
 
   pollTransaction() {
@@ -65,14 +62,13 @@ export class HomePage implements OnInit {
             this.updateBalance();
           }
           this.transactions = transactions;
+          this.isLoading = false;
         });
     }
   }
 
-  updateBalance() {
-    this.userService.getUser().subscribe((user) => {
-      this.user = user;
-    });
+  async updateBalance() {
+    this.user = await this.userService.getUser();
   }
 
   toggleAddress() {
