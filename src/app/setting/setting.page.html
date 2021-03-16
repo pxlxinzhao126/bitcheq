@@ -19,7 +19,7 @@
         </div>
 
         <div class="field-value">
-          <ion-text color="medium" >{{user.email}}</ion-text>
+          <ion-text color="medium">{{user.email}}</ion-text>
         </div>
       </div>
     </ion-item>
@@ -31,17 +31,19 @@
         </div>
 
         <div class="field-value">
-          <ion-text color="medium" >{{getStartedDate()}}</ion-text>
+          <ion-text color="medium">{{getStartedDate()}}</ion-text>
         </div>
       </div>
     </ion-item>
 
     <div class="logout-button-container">
-      <ion-button color="danger" expand="block" fill="outline" (click)="logout()"
+      <ion-button
+        color="danger"
+        expand="block"
+        fill="outline"
+        (click)="logout()"
         >Logout</ion-button
       >
     </div>
-
   </div>
-
 </ion-content>

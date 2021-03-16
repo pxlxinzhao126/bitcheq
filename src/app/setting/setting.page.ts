@@ -17,17 +17,19 @@ export class SettingPage implements OnInit {
   constructor(
     private firebaseService: FirebaseService,
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
   ) {}
 
   ngOnInit() {
     this.user = this.firebaseService.getCurrentUser();
 
     if (this.user.email) {
-      this.userService.getUser(encodeURIComponent(this.user.email)).then((res) => {
-        this.bitcheqUser = res;
-        console.log('res', res);
-      });
+      this.userService
+        .getUser(encodeURIComponent(this.user.email))
+        .then((res) => {
+          this.bitcheqUser = res;
+          console.log('res', res);
+        });
     }
   }
 
@@ -38,11 +40,7 @@ export class SettingPage implements OnInit {
   }
 
   async logout() {
-    if (this.firebaseService.isGoogle) {
-      await Plugins.GoogleAuth.signOut();
-    } else {
-      await this.firebaseService.signOut();
-    }
+    await this.firebaseService.signOut();
     this.router.navigate(['login']);
   }
 }

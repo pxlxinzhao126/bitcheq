@@ -29,7 +29,7 @@ export class HomePage implements OnInit {
     private transactionService: TransactionService,
     private clipboard: Clipboard,
     private iab: InAppBrowser,
-    private popoverController: PopoverController
+    private popoverController: PopoverController,
   ) {}
 
   ngOnInit() {
@@ -52,9 +52,7 @@ export class HomePage implements OnInit {
       interval(500000)
         .pipe(
           startWith(0),
-          switchMap(() =>
-            this.userService.getTransactionByOwner(),
-          ),
+          switchMap(() => this.userService.getTransactionByOwner()),
         )
         .subscribe((transactions: any[]) => {
           console.log('transactions', transactions);
@@ -119,7 +117,7 @@ export class HomePage implements OnInit {
     const popover = await this.popoverController.create({
       component: TooltipComponent,
       event: ev,
-      translucent: true
+      translucent: true,
     });
     return await popover.present();
   }

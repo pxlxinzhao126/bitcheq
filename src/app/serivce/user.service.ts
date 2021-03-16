@@ -5,7 +5,10 @@ import { FirebaseService } from './firebase.service';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
-  constructor(private httpClient: HttpClient, private firebaseService: FirebaseService) {}
+  constructor(
+    private httpClient: HttpClient,
+    private firebaseService: FirebaseService,
+  ) {}
 
   private getCurrentUserEmail() {
     return this.firebaseService.getCurrentUser().email;
@@ -13,44 +16,78 @@ export class UserService {
 
   getTransactionByOwner() {
     return this.httpClient.get(
-      `${environment.apiEndpoint}/transactions/owner/${this.getCurrentUserEmail()}`,
+      `${
+        environment.apiEndpoint
+      }/transactions/owner/${this.getCurrentUserEmail()}`,
     );
   }
 
   createUser(email: string) {
     return this.httpClient
-    .post(`${environment.apiEndpoint}/users/create`, {username: email})
-    .toPromise();
+      .post(`${environment.apiEndpoint}/users/create`, { username: email })
+      .toPromise();
   }
 
   getUser(email) {
-    console.log('this.getCurrentUser()', this.getCurrentUserEmail());
     return this.httpClient
-      .get(`${environment.apiEndpoint}/users?username=${email ? email : this.getCurrentUserEmail()}`)
+      .get(
+        `${environment.apiEndpoint}/users?username=${
+          email ? email : this.getCurrentUserEmail()
+        }`,
+      )
       .toPromise();
   }
 
   getAddress() {
     return this.httpClient
-      .get(`${environment.apiEndpoint}/block/address?username=${this.getCurrentUserEmail()}`)
+      .get(
+        `${
+          environment.apiEndpoint
+        }/block/address?username=${this.getCurrentUserEmail()}`,
+      )
       .toPromise();
   }
 
   confirm() {
     return this.httpClient
-      .post(`${environment.apiEndpoint}/block/confirm`, { user: this.getCurrentUserEmail() })
+      .post(`${environment.apiEndpoint}/block/confirm`, {
+        user: this.getCurrentUserEmail(),
+      })
       .toPromise();
   }
 
   async createUserIfNotExists(email: string) {
-      const bitcheqUser = await this.getUser(email);
+    const bitcheqUser = await this.getUser(email);
 
-      if (!bitcheqUser) {
-        await this.createUserByEmail(email);
-      } else {
-        // tslint:disable-next-line:no-string-literal
-        console.log(`user ${bitcheqUser['username']} exists`);
-      }
+    if (!bitcheqUser) {
+      await this.createUserByEmail(email);
+    } else {
+      // tslint:disable-next-line:no-string-literal
+      console.log(`user ${bitcheqUser['username']} exists`);
+    }
+  }
+
+  async createUserAndSignUpFirebaseIfNotExists(googleUser: any) {
+    console.log(1);
+    const { email, id } = googleUser;
+    const bitcheqUser = await this.getUser(email);
+
+    console.log(2);
+
+
+    if (!bitcheqUser) {
+      await this.firebaseService
+        .createUserWithEmailAndPassword(email, id)
+        .then((result) => console.log(`created firebase user ${email}`))
+        .catch((e) => {
+          console.log(`Not able to create firebase user ${email}`);
+        });
+      await this.createUserByEmail(email);
+      console.log(`created bitcheq user ${email}`);
+    } else {
+      // tslint:disable-next-line:no-string-literal
+      console.log(`user ${bitcheqUser['username']} exists`);
+    }
   }
 
   private async createUserByEmail(email: string) {

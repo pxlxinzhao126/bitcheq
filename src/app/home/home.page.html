@@ -6,8 +6,7 @@
 
 <ion-content [fullscreen]="true">
   <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
-    <ion-refresher-content>
-    </ion-refresher-content>
+    <ion-refresher-content> </ion-refresher-content>
   </ion-refresher>
 
   <ion-header collapse="condense">
@@ -27,13 +26,19 @@
 
     <div class="pending-balance" *ngIf="!isLoading && user?.pendingBtcBalance">
       <ion-text color="medium">
-        <small>{{user?.pendingBtcBalance ? 'Pending balance ' + user.pendingBtcBalance + ' BTC' : ''}}
+        <small
+          >{{user?.pendingBtcBalance ? 'Pending balance ' +
+          user.pendingBtcBalance + ' BTC' : ''}}
         </small>
       </ion-text>
-      <ion-icon class="info-icon" color="medium" slot="end" name="alert-circle-outline"
-      (click)="presentPopover()"></ion-icon>
+      <ion-icon
+        class="info-icon"
+        color="medium"
+        slot="end"
+        name="alert-circle-outline"
+        (click)="presentPopover()"
+      ></ion-icon>
     </div>
-
   </div>
 
   <div class="button-container">
@@ -98,10 +103,7 @@
 
     <ion-list>
       <ion-item *ngFor="let transaction of transactions" lines="none">
-        <div
-          class="transaction-row"
-          (click)="presentTransaction(transaction)"
-        >
+        <div class="transaction-row" (click)="presentTransaction(transaction)">
           <div class="transaction-date">
             <ion-text> {{getTransactionTime(transaction)}} </ion-text>
           </div>

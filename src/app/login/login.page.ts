@@ -25,6 +25,7 @@ export class LoginPage {
     'auth/user-not-found',
     'auth/too-many-requests',
   ];
+  gmailUsed = false;
 
   constructor(
     private firebaseService: FirebaseService,
@@ -54,7 +55,7 @@ export class LoginPage {
           this.email,
           this.password,
         );
-        console.log('login success', user);
+        console.log('firebase login success', user);
         this.router.navigate(['tabs', 'home']);
       } catch (e) {
         console.error('login error', e);
@@ -94,14 +95,21 @@ export class LoginPage {
 
   async googleSignIn() {
     try {
-      const user = (await Plugins.GoogleAuth.signIn()) as any;
-      console.log('googleSignIn success', user);
-      this.firebaseService.setGoogleUser(user);
-      await this.userService.createUserIfNotExists(user.email);
+      const googleUser = (await Plugins.GoogleAuth.signIn()) as any;
+      console.log('googleSignIn success', googleUser);
+      // this.firebaseService.setGoogleUser(user);
+      await this.userService.createUserAndSignUpFirebaseIfNotExists(googleUser);
+      const firebaseUser = await this.firebaseService.signInWithEmailAndPassword(googleUser.email, googleUser.id);
+      console.log('firebase login success', firebaseUser);
 
       this.router.navigate(['tabs', 'home']);
     } catch (error) {
       console.log('googleSignIn error', error);
+
+      if (error.code === 'auth/wrong-password') {
+        console.log(`Gmail user is already registered, please use email and password to login.`);
+        this.gmailUsed = true;
+      }
     }
   }
 
@@ -114,6 +122,7 @@ export class LoginPage {
   clearError() {
     this.submitted = false;
     this.errorCode = null;
+    this.gmailUsed = false;
   }
 
   isUnknownError() {
