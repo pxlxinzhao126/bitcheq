@@ -13,6 +13,8 @@ ion-content {
 
   .field-value {
     float: right;
+    max-width: 160px;
+    margin-left: 32px;
   }
 
   .logout-button-container {
