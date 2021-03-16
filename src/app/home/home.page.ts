@@ -17,7 +17,7 @@ import { TooltipComponent } from './tooltip/tooltip.component';
 })
 export class HomePage implements OnInit {
   address: any;
-  user: any;
+  bitcheqUser: any;
   transactions: any[];
   showAddress = false;
   copied = false;
@@ -39,7 +39,7 @@ export class HomePage implements OnInit {
   async refresh(event) {
     await this.userService.confirm();
 
-    this.user = await this.userService.getUser();
+    this.bitcheqUser = await this.userService.getUser(null);
     const addressRes = await this.userService.getAddress();
     /* tslint:disable:no-string-literal */
     this.address = addressRes['data']?.address;
@@ -48,12 +48,12 @@ export class HomePage implements OnInit {
   }
 
   pollTransaction(event) {
-    if (this.user?.username) {
+    if (this.bitcheqUser?.username) {
       interval(500000)
         .pipe(
           startWith(0),
           switchMap(() =>
-            this.userService.getTransactionByOwner(this.user.username),
+            this.userService.getTransactionByOwner(),
           ),
         )
         .subscribe((transactions: any[]) => {
@@ -72,7 +72,7 @@ export class HomePage implements OnInit {
   }
 
   async updateBalance() {
-    this.user = await this.userService.getUser();
+    this.bitcheqUser = await this.userService.getUser(null);
   }
 
   toggleAddress() {
@@ -80,8 +80,8 @@ export class HomePage implements OnInit {
   }
 
   getBalance() {
-    if (this.user) {
-      return Math.round(this.user.btcBalance * 100000000) / 100000000;
+    if (this.bitcheqUser) {
+      return Math.round(this.bitcheqUser.btcBalance * 100000000) / 100000000;
     } else {
       return 0;
     }

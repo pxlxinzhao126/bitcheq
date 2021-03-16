@@ -1,3 +1,21 @@
 ion-content {
   padding: 24px;
 }
+
+.settings-container {
+  padding: 16px;
+
+  .field-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .field-value {
+    float: right;
+  }
+
+  .logout-button-container {
+    padding: 16px 16px 0 16px;
+  }
+}

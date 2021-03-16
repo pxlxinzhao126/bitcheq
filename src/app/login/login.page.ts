@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FirebaseService } from '../serivce/firebase.service';
 import '@codetrix-studio/capacitor-google-auth';
 import { Plugins } from '@capacitor/core';
+import { UserService } from '../serivce/user.service';
 
 @Component({
   selector: 'app-login',
@@ -27,6 +28,7 @@ export class LoginPage {
 
   constructor(
     private firebaseService: FirebaseService,
+    private userService: UserService,
     private router: Router,
   ) {}
 
@@ -78,6 +80,8 @@ export class LoginPage {
         console.log('signUp success', userCredential.user);
         this.signUpSuccess = true;
         this.switchState();
+
+        await this.userService.createUserIfNotExists(this.email);
         setTimeout(() => {
           this.signUpSuccess = false;
         }, 5000);
@@ -93,7 +97,8 @@ export class LoginPage {
       const user = (await Plugins.GoogleAuth.signIn()) as any;
       console.log('googleSignIn success', user);
       this.firebaseService.setGoogleUser(user);
-      console.log('navigating to home');
+      await this.userService.createUserIfNotExists(user.email);
+
       this.router.navigate(['tabs', 'home']);
     } catch (error) {
       console.log('googleSignIn error', error);

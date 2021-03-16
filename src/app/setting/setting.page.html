@@ -11,7 +11,37 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-button color="danger" expand="block" fill="outline" (click)="logout()"
-    >Logout</ion-button
-  >
+  <div class="settings-container">
+    <ion-item>
+      <div class="field-row">
+        <div>
+          <ion-text color="dark">Email</ion-text>
+        </div>
+
+        <div class="field-value">
+          <ion-text color="medium" >{{user.email}}</ion-text>
+        </div>
+      </div>
+    </ion-item>
+
+    <ion-item>
+      <div class="field-row">
+        <div>
+          <ion-text color="dark">Account created on</ion-text>
+        </div>
+
+        <div class="field-value">
+          <ion-text color="medium" >{{getStartedDate()}}</ion-text>
+        </div>
+      </div>
+    </ion-item>
+
+    <div class="logout-button-container">
+      <ion-button color="danger" expand="block" fill="outline" (click)="logout()"
+        >Logout</ion-button
+      >
+    </div>
+
+  </div>
+
 </ion-content>
