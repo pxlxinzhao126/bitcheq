@@ -9,6 +9,8 @@ import { Clipboard } from '@ionic-native/clipboard/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { PopoverController } from '@ionic/angular';
 import { TooltipComponent } from './tooltip/tooltip.component';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SendSevice } from '../serivce/send.service';
 
 @Component({
   selector: 'app-home',
@@ -19,22 +21,32 @@ export class HomePage implements OnInit, OnDestroy {
   address: any;
   bitcheqUser: any;
   transactions: any[];
+  destinationAddress = '';
   showAddress = false;
+  showSend = false;
   copied = false;
   isLoading = true;
   subscription: Subscription;
+  sendForm: FormGroup;
+  sendFormSubmitted = false;
 
   constructor(
     private userService: UserService,
+    private sendSerivce: SendSevice,
     private router: Router,
     private transactionService: TransactionService,
     private clipboard: Clipboard,
     private iab: InAppBrowser,
     private popoverController: PopoverController,
+    private formBuilder: FormBuilder,
   ) {}
 
   ngOnInit() {
     console.log('HomePage onInit');
+    this.sendForm = this.formBuilder.group({
+      address: ['', [Validators.required, Validators.minLength(30)]],
+    });
+
     this.refresh(null);
   }
 
@@ -97,6 +109,12 @@ export class HomePage implements OnInit, OnDestroy {
     this.showAddress = !this.showAddress;
   }
 
+  toggleSend() {
+    this.showSend = !this.showSend;
+    this.sendFormSubmitted = false;
+    this.sendForm.controls.address.setValue('');
+  }
+
   getBalance() {
     if (this.bitcheqUser) {
       return Math.round(this.bitcheqUser.btcBalance * 100000000) / 100000000;
@@ -140,5 +158,22 @@ export class HomePage implements OnInit, OnDestroy {
       translucent: true,
     });
     return await popover.present();
+  }
+
+  async submitSendForm() {
+    this.sendFormSubmitted = true;
+    if (this.sendForm.valid) {
+      console.log('start withdrawing');
+      this.sendSerivce
+        .withdraw(0.0001, this.sendForm.controls.address.value)
+        .subscribe(
+          (res) => {
+            console.log('finish withdrawing');
+          },
+          (err) => {
+            console.log(err);
+          },
+        );
+    }
   }
 }

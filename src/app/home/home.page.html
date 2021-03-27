@@ -42,7 +42,7 @@
   </div>
 
   <div class="button-container">
-    <ion-button color="primary" size="small">
+    <ion-button color="primary" size="small" (click)="toggleSend()">
       <ion-icon slot="end" name="arrow-up-outline"></ion-icon>
       Send
     </ion-button>
@@ -52,6 +52,24 @@
       Receive
     </ion-button>
   </div>
+
+  <ion-card *ngIf="showSend">
+    <ion-card-content>
+      <form [formGroup]="sendForm" (ngSubmit)="submitSendForm()">
+        <ion-text color="dark"
+          >Please only enter a valid Bitcoin Testnet address</ion-text
+        >
+        <ion-input
+          placeholder="Enter address"
+          formControlName="address"
+        ></ion-input>
+        <ion-text color="danger" *ngIf="sendFormSubmitted && !sendForm.valid"
+          >Address is not valid</ion-text
+        >
+        <ion-button color="dark" expand="block" type="submit">Send</ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
 
   <ion-card *ngIf="showAddress && address">
     <ion-card-content>

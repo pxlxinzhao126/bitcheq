@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { QRCodeModule } from 'angularx-qrcode';
 import { TransactionModule } from '../transaction/transaction.module';
@@ -16,6 +16,7 @@ import { TooltipComponent } from './tooltip/tooltip.component';
     HomePageRoutingModule,
     QRCodeModule,
     TransactionModule,
+    ReactiveFormsModule,
   ],
   declarations: [HomePage, TooltipComponent],
 })
