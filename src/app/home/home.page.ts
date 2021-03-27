@@ -22,6 +22,7 @@ export class HomePage implements OnInit {
   showAddress = false;
   copied = false;
   isLoading = true;
+  isPolling = false;
 
   constructor(
     private userService: UserService,
@@ -48,7 +49,7 @@ export class HomePage implements OnInit {
   }
 
   pollTransaction(event) {
-    if (this.bitcheqUser?.username) {
+    if (this.bitcheqUser?.username && !this.isPolling) {
       interval(60000)
         .pipe(
           startWith(0),
@@ -66,6 +67,7 @@ export class HomePage implements OnInit {
           this.isLoading = false;
           event?.target?.complete();
         });
+      this.isPolling = true;
     }
   }
 
