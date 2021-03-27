@@ -30,19 +30,23 @@ export class UserService {
 
   getUser(email) {
     return this.httpClient
+      .get(`${environment.apiEndpoint}/users?username=${email}`)
+      .toPromise();
+  }
+
+  refreshCurrentUser() {
+    return this.httpClient
       .get(
-        `${environment.apiEndpoint}/users?username=${
-          email ? email : this.getCurrentUserEmail()
-        }`,
+        `${
+          environment.apiEndpoint
+        }/users?username=${this.getCurrentUserEmail()}`,
       )
       .toPromise();
   }
 
   verifyEmail(email) {
     return this.httpClient
-      .get(
-        `${environment.apiEndpoint}/users/verifyEmail?username=${email}`,
-      )
+      .get(`${environment.apiEndpoint}/users/verifyEmail?username=${email}`)
       .toPromise();
   }
 

@@ -34,7 +34,6 @@ export class LoginPage {
   ) {}
 
   ionViewDidEnter() {
-    console.log('ionViewDidEnter');
     this.clearError();
   }
 
@@ -104,7 +103,10 @@ export class LoginPage {
       console.log('googleSignIn success', googleUser);
       // this.firebaseService.setGoogleUser(user);
       await this.userService.createUserAndSignUpFirebaseIfNotExists(googleUser);
-      const firebaseUser = await this.firebaseService.signInWithEmailAndPassword(googleUser.email, googleUser.id);
+      const firebaseUser = await this.firebaseService.signInWithEmailAndPassword(
+        googleUser.email,
+        googleUser.id,
+      );
       console.log('firebase login success', firebaseUser);
 
       this.router.navigate(['tabs', 'home']);
@@ -112,7 +114,9 @@ export class LoginPage {
       console.log('googleSignIn error', error);
 
       if (error.code === 'auth/wrong-password') {
-        console.log(`Gmail user is already registered, please use email and password to login.`);
+        console.log(
+          `Gmail user is already registered, please use email and password to login.`,
+        );
         this.gmailUsed = true;
       }
     }

@@ -115,13 +115,10 @@
 
       <div class="google-signIn" (click)="googleSignIn()"></div>
 
-      <ion-text
-        color="danger"
-        *ngIf="gmailUsed"
-        >
-        Gmail user is already registered, please use email and password to login.
-        </ion-text
-      >
+      <ion-text color="danger" *ngIf="gmailUsed">
+        Gmail user is already registered, please use email and password to
+        login.
+      </ion-text>
     </form>
   </div>
 </ion-content>

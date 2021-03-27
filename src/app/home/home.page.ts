@@ -39,7 +39,7 @@ export class HomePage implements OnInit {
   async refresh(event) {
     await this.userService.confirm();
 
-    this.bitcheqUser = await this.userService.getUser(null);
+    this.bitcheqUser = await this.userService.refreshCurrentUser();
     const addressRes = await this.userService.getAddress();
     /* tslint:disable:no-string-literal */
     this.address = addressRes['data']?.address;
@@ -49,7 +49,7 @@ export class HomePage implements OnInit {
 
   pollTransaction(event) {
     if (this.bitcheqUser?.username) {
-      interval(500000)
+      interval(60000)
         .pipe(
           startWith(0),
           switchMap(() => this.userService.getTransactionByOwner()),
@@ -70,7 +70,7 @@ export class HomePage implements OnInit {
   }
 
   async updateBalance() {
-    this.bitcheqUser = await this.userService.getUser(null);
+    this.bitcheqUser = await this.userService.refreshCurrentUser();
   }
 
   toggleAddress() {
@@ -106,11 +106,11 @@ export class HomePage implements OnInit {
 
   requestBitcoin() {
     const browser = this.iab.create('https://coinfaucet.eu/en/btc-testnet');
-    // browser.on('loadstop')?.subscribe((event) => {
-    //   browser.executeScript({
-    //     code: `document.getElementById('address').value=${this.address}`,
-    //   });
-    // });
+    browser.on('loadstop')?.subscribe((event) => {
+      browser.executeScript({
+        code: `document.getElementById('address').value=${this.address}`,
+      });
+    });
   }
 
   async presentPopover(ev: any) {
