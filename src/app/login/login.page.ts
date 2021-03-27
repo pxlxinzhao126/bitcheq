@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FirebaseService } from '../serivce/firebase.service';
 import '@codetrix-studio/capacitor-google-auth';
@@ -10,7 +10,7 @@ import { UserService } from '../serivce/user.service';
   templateUrl: 'login.page.html',
   styleUrls: ['login.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class LoginPage implements OnInit, OnDestroy {
   email = 'apple@me.com';
   password = '123456';
   password2: string;
@@ -36,6 +36,10 @@ export class LoginPage implements OnInit {
   ngOnInit() {
     console.log('LoginPage onInit');
     this.clearError();
+  }
+
+  ngOnDestroy() {
+    console.log('LoginPage onDestroy');
   }
 
   switchState() {

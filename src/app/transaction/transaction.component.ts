@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { TransactionService } from './transaction.service';
@@ -10,7 +10,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
   templateUrl: './transaction.component.html',
   styleUrls: ['./transaction.component.scss'],
 })
-export class TransactionComponent implements OnInit {
+export class TransactionComponent implements OnInit, OnDestroy {
   private sub: Subscription;
   private id: string;
   tx: any;
@@ -26,6 +26,11 @@ export class TransactionComponent implements OnInit {
     if (!this.tx) {
       this.router.navigate(['']);
     }
+    console.log('TxPage onInit');
+  }
+
+  ngOnDestroy() {
+    console.log('TxPage onDestroy');
   }
 
   shortId() {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { interval, Subscription } from 'rxjs';
@@ -15,7 +15,7 @@ import { TooltipComponent } from './tooltip/tooltip.component';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit, OnDestroy {
   address: any;
   bitcheqUser: any;
   transactions: any[];
@@ -35,10 +35,11 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     console.log('HomePage onInit');
+    this.refresh(null);
   }
 
-  ionViewDidEnter() {
-    this.refresh(null);
+  ngOnDestroy() {
+    console.log('HomePage onDestroy');
   }
 
   ionViewWillLeave() {

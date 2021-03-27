@@ -1,16 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FirebaseService } from '../serivce/firebase.service';
-import { Plugins } from '@capacitor/core';
-import { UserService } from '../serivce/user.service';
 import * as moment from 'moment';
+import { FirebaseService } from '../serivce/firebase.service';
+import { UserService } from '../serivce/user.service';
 
 @Component({
   selector: 'app-setting',
   templateUrl: 'setting.page.html',
   styleUrls: ['setting.page.scss'],
 })
-export class SettingPage implements OnInit {
+export class SettingPage implements OnInit, OnDestroy {
   user: any;
   bitcheqUser: any;
 
@@ -21,7 +20,7 @@ export class SettingPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log('SettingPage init');
+    console.log('SettingPage onInit');
 
     this.user = this.firebaseService.getCurrentUser();
 
@@ -33,6 +32,10 @@ export class SettingPage implements OnInit {
           console.log('res', res);
         });
     }
+  }
+
+  ngOnDestroy() {
+    console.log('SettingPage onDestroy');
   }
 
   getStartedDate() {
