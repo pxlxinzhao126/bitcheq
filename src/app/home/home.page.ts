@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
-import { interval } from 'rxjs';
+import { interval, Subscription } from 'rxjs';
 import { startWith, switchMap } from 'rxjs/operators';
 import { UserService } from '../serivce/user.service';
 import { TransactionService } from '../transaction/transaction.service';
@@ -15,14 +15,14 @@ import { TooltipComponent } from './tooltip/tooltip.component';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage {
   address: any;
   bitcheqUser: any;
   transactions: any[];
   showAddress = false;
   copied = false;
   isLoading = true;
-  isPolling = false;
+  subscription: Subscription;
 
   constructor(
     private userService: UserService,
@@ -33,8 +33,14 @@ export class HomePage implements OnInit {
     private popoverController: PopoverController,
   ) {}
 
-  ngOnInit() {
+  ionViewDidEnter() {
     this.refresh(null);
+  }
+
+  ionViewWillLeave() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
   async refresh(event) {
@@ -49,8 +55,12 @@ export class HomePage implements OnInit {
   }
 
   pollTransaction(event) {
-    if (this.bitcheqUser?.username && !this.isPolling) {
-      interval(60000)
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+
+    if (this.bitcheqUser?.username) {
+      this.subscription = interval(60000)
         .pipe(
           startWith(0),
           switchMap(() => this.userService.getTransactionByOwner()),
@@ -67,7 +77,10 @@ export class HomePage implements OnInit {
           this.isLoading = false;
           event?.target?.complete();
         });
-      this.isPolling = true;
+    } else {
+      this.isLoading = false;
+      event?.target?.complete();
+      console.warn('No user found. Did not refresh.');
     }
   }
 
