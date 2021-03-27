@@ -38,6 +38,14 @@ export class UserService {
       .toPromise();
   }
 
+  verifyEmail(email) {
+    return this.httpClient
+      .get(
+        `${environment.apiEndpoint}/users/verifyEmail?username=${email}`,
+      )
+      .toPromise();
+  }
+
   getAddress() {
     return this.httpClient
       .get(
@@ -69,7 +77,7 @@ export class UserService {
 
   async createUserAndSignUpFirebaseIfNotExists(googleUser: any) {
     const { email, id } = googleUser;
-    const bitcheqUser = await this.getUser(email);
+    const bitcheqUser = await this.verifyEmail(email);
 
     if (!bitcheqUser) {
       await this.firebaseService

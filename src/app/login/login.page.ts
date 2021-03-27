@@ -33,6 +33,11 @@ export class LoginPage {
     private router: Router,
   ) {}
 
+  ionViewDidEnter() {
+    console.log('ionViewDidEnter');
+    this.clearError();
+  }
+
   switchState() {
     if (this.state === 'login') {
       this.state = 'signUp';
