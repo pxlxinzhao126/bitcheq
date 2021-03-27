@@ -11,7 +11,7 @@ import { UserService } from '../serivce/user.service';
   styleUrls: ['login.page.scss'],
 })
 export class LoginPage {
-  email = 'p@p.com';
+  email = 'apple@me.com';
   password = '123456';
   password2: string;
   minLength = 6;

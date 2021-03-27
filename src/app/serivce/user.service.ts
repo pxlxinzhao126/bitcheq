@@ -68,12 +68,8 @@ export class UserService {
   }
 
   async createUserAndSignUpFirebaseIfNotExists(googleUser: any) {
-    console.log(1);
     const { email, id } = googleUser;
     const bitcheqUser = await this.getUser(email);
-
-    console.log(2);
-
 
     if (!bitcheqUser) {
       await this.firebaseService
