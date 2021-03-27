@@ -21,6 +21,8 @@ export class SettingPage implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log('SettingPage init');
+
     this.user = this.firebaseService.getCurrentUser();
 
     if (this.user.email) {

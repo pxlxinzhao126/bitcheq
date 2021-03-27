@@ -15,7 +15,7 @@ import { TooltipComponent } from './tooltip/tooltip.component';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
   address: any;
   bitcheqUser: any;
   transactions: any[];
@@ -32,6 +32,10 @@ export class HomePage {
     private iab: InAppBrowser,
     private popoverController: PopoverController,
   ) {}
+
+  ngOnInit() {
+    console.log('HomePage onInit');
+  }
 
   ionViewDidEnter() {
     this.refresh(null);

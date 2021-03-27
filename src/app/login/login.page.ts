@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FirebaseService } from '../serivce/firebase.service';
 import '@codetrix-studio/capacitor-google-auth';
@@ -10,7 +10,7 @@ import { UserService } from '../serivce/user.service';
   templateUrl: 'login.page.html',
   styleUrls: ['login.page.scss'],
 })
-export class LoginPage {
+export class LoginPage implements OnInit {
   email = 'apple@me.com';
   password = '123456';
   password2: string;
@@ -33,7 +33,8 @@ export class LoginPage {
     private router: Router,
   ) {}
 
-  ionViewDidEnter() {
+  ngOnInit() {
+    console.log('LoginPage onInit');
     this.clearError();
   }
 
