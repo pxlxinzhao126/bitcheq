@@ -1,7 +1,8 @@
 {
   "name": "bitcheq",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular",
   "id": "24496075"
