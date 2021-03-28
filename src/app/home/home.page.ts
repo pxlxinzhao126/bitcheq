@@ -44,12 +44,15 @@ export class HomePage implements OnInit, OnDestroy {
   ngOnInit() {
     console.log('HomePage onInit');
     this.sendForm = this.formBuilder.group({
-      amount: ['', [
-        Validators.required, 
-        Validators.min(0.00002),
-        Validators.max(5),
-        Validators.pattern("^[0-5]$|^[0-4]\.[0-9]{1,8}$")
-      ]],
+      amount: [
+        '',
+        [
+          Validators.required,
+          Validators.min(0.00002),
+          Validators.max(5),
+          Validators.pattern('^[0-5]$|^[0-4].[0-9]{1,8}$'),
+        ],
+      ],
       address: ['', [Validators.required, Validators.minLength(30)]],
     });
 
@@ -168,22 +171,19 @@ export class HomePage implements OnInit, OnDestroy {
 
   async submitSendForm() {
     this.sendFormSubmitted = true;
-    console.log('amount', this.sendForm.controls.amount.valid);
 
     if (this.sendForm.valid) {
       const amount = this.sendForm.controls.amount.value;
       const address = this.sendForm.controls.address.value;
       console.log(`sending ${amount} to ${address}`);
-      this.sendSerivce
-        .withdraw(+amount, address)
-        .subscribe(
-          (res) => {
-            console.log('send transaction finished');
-          },
-          (err) => {
-            console.log(err);
-          },
-        );
+      this.sendSerivce.withdraw(+amount, address).subscribe(
+        (res) => {
+          console.log('send transaction finished');
+        },
+        (err) => {
+          console.log(err);
+        },
+      );
     }
   }
 }

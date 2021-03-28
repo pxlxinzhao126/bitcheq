@@ -58,3 +58,16 @@
   }
 }
 
+.send-form {
+  .send-hint {
+    padding-bottom: 16px;
+  }
+
+  h4, p {
+    margin-left: 8px;
+  }
+
+  ion-button {
+    margin-top: 16px;
+  }
+}

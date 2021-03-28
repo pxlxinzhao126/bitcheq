@@ -55,26 +55,41 @@
 
   <ion-card *ngIf="showSend">
     <ion-card-content>
-      <form [formGroup]="sendForm" (ngSubmit)="submitSendForm()">
-        <ion-text color="dark"
-          >Please only enter a valid Bitcoin Testnet address</ion-text
-        >
+      <form
+        [formGroup]="sendForm"
+        (ngSubmit)="submitSendForm()"
+        class="send-form"
+      >
+        <ion-text color="dark">
+          <h4 class="send-hint">
+            Please only enter a valid Bitcoin Testnet address
+          </h4>
+        </ion-text>
         <ion-input
           placeholder="Amount to send"
           formControlName="amount"
           maxlength="8"
           type="number"
         ></ion-input>
-        <ion-text color="danger" *ngIf="sendFormSubmitted && !sendForm.controls.address.valid"
-          >Amount is not valid, please inupt a number between 0.00002 and 5, with maximum 8 decimal places</ion-text
+        <ion-text
+          color="danger"
+          *ngIf="sendFormSubmitted && !sendForm.controls.address.valid"
         >
+          <p>
+            Amount is not valid, please inupt a number between 0.00002 and 5,
+            with maximum 8 decimal places
+          </p>
+        </ion-text>
         <ion-input
           placeholder="Enter address"
           formControlName="address"
         ></ion-input>
-        <ion-text color="danger" *ngIf="sendFormSubmitted && !sendForm.controls.address.valid"
-          >Address is not valid</ion-text
+        <ion-text
+          color="danger"
+          *ngIf="sendFormSubmitted && !sendForm.controls.address.valid"
         >
+          <p>Address is not valid</p>
+        </ion-text>
         <ion-button color="dark" expand="block" type="submit">Send</ion-button>
       </form>
     </ion-card-content>
