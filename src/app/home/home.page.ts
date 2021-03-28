@@ -62,7 +62,6 @@ export class HomePage implements OnInit, OnDestroy {
     });
 
     this.presentLoading();
-    this.refresh(null);
   }
 
   ngOnDestroy() {
@@ -75,6 +74,7 @@ export class HomePage implements OnInit, OnDestroy {
       message: 'Loading...',
     });
     await this.loading.present();
+    this.refresh(null);
   }
 
   dismissLoading() {
@@ -175,12 +175,7 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   requestBitcoin() {
-    const browser = this.iab.create('https://coinfaucet.eu/en/btc-testnet');
-    // browser.on('loadstop')?.subscribe((event) => {
-    //   browser.executeScript({
-    //     code: `document.getElementById('address').value=${this.address}`,
-    //   });
-    // });
+    this.iab.create('https://coinfaucet.eu/en/btc-testnet');
   }
 
   async presentTestnet(ev: any) {
