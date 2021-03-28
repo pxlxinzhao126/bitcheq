@@ -136,16 +136,16 @@
           </div>
           <div class="transaction-amount">
             <ion-text
-              *ngIf="transaction && transaction.amount_received > 0"
+              *ngIf="transaction && transaction.balance_change > 0"
               color="success"
             >
-              <p>+{{transaction.amount_received }}</p>
+              <p>+{{transaction.balance_change}}</p>
             </ion-text>
             <ion-text
-              *ngIf="transaction && transaction.amount_sent > 0"
+              *ngIf="transaction && transaction.balance_change < 0"
               color="danger"
             >
-              <p>-{{transaction.amount_sent }}</p>
+              <p>{{transaction.balance_change}}</p>
             </ion-text>
           </div>
         </div>

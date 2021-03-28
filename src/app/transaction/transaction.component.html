@@ -22,11 +22,11 @@
 
     <ion-item>
       <ion-label>Balance change</ion-label>
-      <ion-note slot="end" *ngIf="tx?.amount_received > 0" color="success">
-        <p>+{{ tx?.amount_received }}</p>
+      <ion-note slot="end" *ngIf="tx?.balance_change > 0" color="success">
+        <p>+{{ tx?.balance_change }}</p>
       </ion-note>
-      <ion-note slot="end" *ngIf="tx?.amount_sent > 0" color="danger">
-        <p>-{{ tx?.amount_sent }}</p>
+      <ion-note slot="end" *ngIf="tx?.balance_change < 0" color="danger">
+        <p>{{ tx?.balance_change }}</p>
       </ion-note>
     </ion-item>
 
