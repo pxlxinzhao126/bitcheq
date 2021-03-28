@@ -18,19 +18,19 @@ export class UserService {
     return this.httpClient.get(
       `${
         environment.apiEndpoint
-      }/transactions/owner/${this.getCurrentUserEmail()}`,
+      }/transactions`,
     );
   }
 
   createUser(email: string) {
     return this.httpClient
-      .post(`${environment.apiEndpoint}/users/create`, { username: email })
+      .post(`${environment.apiEndpoint}/users/create`, {})
       .toPromise();
   }
 
   getUser(email) {
     return this.httpClient
-      .get(`${environment.apiEndpoint}/users?username=${email}`)
+      .get(`${environment.apiEndpoint}/users`)
       .toPromise();
   }
 
@@ -39,14 +39,14 @@ export class UserService {
       .get(
         `${
           environment.apiEndpoint
-        }/users?username=${this.getCurrentUserEmail()}`,
+        }/users`,
       )
       .toPromise();
   }
 
-  verifyEmail(email) {
+  verifyEmail() {
     return this.httpClient
-      .get(`${environment.apiEndpoint}/users/verifyEmail?username=${email}`)
+      .get(`${environment.apiEndpoint}/users/verifyEmail`)
       .toPromise();
   }
 
@@ -55,7 +55,7 @@ export class UserService {
       .get(
         `${
           environment.apiEndpoint
-        }/block/address?username=${this.getCurrentUserEmail()}`,
+        }/block/address`,
       )
       .toPromise();
   }
@@ -81,7 +81,7 @@ export class UserService {
 
   async createUserAndSignUpFirebaseIfNotExists(googleUser: any) {
     const { email, id } = googleUser;
-    const bitcheqUser = await this.verifyEmail(email);
+    const bitcheqUser = await this.verifyEmail();
 
     if (!bitcheqUser) {
       await this.firebaseService

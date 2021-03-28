@@ -1,9 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { TransactionService } from './transaction.service';
-import * as moment from 'moment';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import * as moment from 'moment';
+import { TransactionService } from './transaction.service';
 
 @Component({
   selector: 'app-transaction',
@@ -11,8 +10,6 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
   styleUrls: ['./transaction.component.scss'],
 })
 export class TransactionComponent implements OnInit, OnDestroy {
-  private sub: Subscription;
-  private id: string;
   tx: any;
 
   constructor(
@@ -52,7 +49,7 @@ export class TransactionComponent implements OnInit, OnDestroy {
 
   viewTx(event) {
     event.preventDefault();
-    const browser = this.iab.create(
+    this.iab.create(
       `https://sochain.com/tx/BTCTEST/${this.tx?.txid}`,
     );
   }
