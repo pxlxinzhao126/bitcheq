@@ -135,10 +135,12 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   toggleAddress() {
+    this.showSend = false;
     this.showAddress = !this.showAddress;
   }
 
   toggleSend() {
+    this.showAddress = false;
     this.showSend = !this.showSend;
     this.sendFormSubmitted = false;
     this.sendForm.controls.address.setValue('');
