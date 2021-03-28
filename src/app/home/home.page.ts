@@ -176,11 +176,11 @@ export class HomePage implements OnInit, OnDestroy {
 
   requestBitcoin() {
     const browser = this.iab.create('https://coinfaucet.eu/en/btc-testnet');
-    browser.on('loadstop')?.subscribe((event) => {
-      browser.executeScript({
-        code: `document.getElementById('address').value=${this.address}`,
-      });
-    });
+    // browser.on('loadstop')?.subscribe((event) => {
+    //   browser.executeScript({
+    //     code: `document.getElementById('address').value=${this.address}`,
+    //   });
+    // });
   }
 
   async presentTestnet(ev: any) {
@@ -222,7 +222,7 @@ export class HomePage implements OnInit, OnDestroy {
   scan() {
     this.barcodeScanner.scan().then(barcodeData => {
       console.log('Barcode data', barcodeData);
-      this.sendForm.controls.address.setValue(barcodeData);
+      this.sendForm.controls.address.setValue(barcodeData.text);
     }).catch(err => {
       console.log('Error', err);
     });
