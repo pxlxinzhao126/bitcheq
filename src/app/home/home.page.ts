@@ -11,6 +11,7 @@ import { PopoverController } from '@ionic/angular';
 import { TooltipComponent } from './tooltip/tooltip.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SendSevice } from '../serivce/send.service';
+import { TestnetComponent } from './testnet/testnet.component';
 
 @Component({
   selector: 'app-home',
@@ -160,7 +161,16 @@ export class HomePage implements OnInit, OnDestroy {
     });
   }
 
-  async presentPopover(ev: any) {
+  async presentTestnet(ev: any) {
+    const popover = await this.popoverController.create({
+      component: TestnetComponent,
+      event: ev,
+      translucent: true,
+    });
+    return await popover.present();
+  }
+
+  async presentTooltip(ev: any) {
     const popover = await this.popoverController.create({
       component: TooltipComponent,
       event: ev,

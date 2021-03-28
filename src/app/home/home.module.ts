@@ -6,6 +6,7 @@ import { QRCodeModule } from 'angularx-qrcode';
 import { TransactionModule } from '../transaction/transaction.module';
 import { HomePageRoutingModule } from './home-routing.module';
 import { HomePage } from './home.page';
+import { TestnetComponent } from './testnet/testnet.component';
 import { TooltipComponent } from './tooltip/tooltip.component';
 
 @NgModule({
@@ -18,6 +19,6 @@ import { TooltipComponent } from './tooltip/tooltip.component';
     TransactionModule,
     ReactiveFormsModule,
   ],
-  declarations: [HomePage, TooltipComponent],
+  declarations: [HomePage, TooltipComponent, TestnetComponent],
 })
 export class HomeModule {}

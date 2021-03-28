@@ -17,26 +17,39 @@
 
   <div class="balance-container">
     <ion-text color="medium">
-      <p>Chequing balance</p>
+      <p>
+        Chequing balance ( Testnet
+        <ion-icon
+          class="info-icon"
+          color="medium"
+          slot="end"
+          name="help-circle-outline"
+          (click)="presentTestnet()"
+        ></ion-icon>
+        )
+      </p>
     </ion-text>
 
     <ion-text color="dark">
       <h1>{{isLoading ? 0 : getBalance()}} BTC</h1>
     </ion-text>
 
-    <div class="pending-balance" *ngIf="!isLoading && user?.pendingBtcBalance">
+    <div
+      class="pending-balance"
+      *ngIf="!isLoading && bitcheqUser?.pendingBtcBalance"
+    >
       <ion-text color="medium">
         <small
-          >{{user?.pendingBtcBalance ? 'Pending balance ' +
-          user.pendingBtcBalance + ' BTC' : ''}}
+          >{{bitcheqUser?.pendingBtcBalance ? 'Pending balance ' +
+          bitcheqUser.pendingBtcBalance + ' BTC' : ''}}
         </small>
       </ion-text>
       <ion-icon
         class="info-icon"
         color="medium"
         slot="end"
-        name="alert-circle-outline"
-        (click)="presentPopover()"
+        name="help-circle-outline"
+        (click)="presentTooltip()"
       ></ion-icon>
     </div>
   </div>
