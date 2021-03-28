@@ -1,17 +1,17 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Clipboard } from '@ionic-native/clipboard/ngx';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { LoadingController, PopoverController } from '@ionic/angular';
 import * as moment from 'moment';
 import { interval, Subscription } from 'rxjs';
 import { startWith, switchMap } from 'rxjs/operators';
+import { SendSevice } from '../serivce/send.service';
 import { UserService } from '../serivce/user.service';
 import { TransactionService } from '../transaction/transaction.service';
-import { Clipboard } from '@ionic-native/clipboard/ngx';
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { PopoverController } from '@ionic/angular';
-import { TooltipComponent } from './tooltip/tooltip.component';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { SendSevice } from '../serivce/send.service';
 import { TestnetComponent } from './testnet/testnet.component';
+import { TooltipComponent } from './tooltip/tooltip.component';
 
 @Component({
   selector: 'app-home',
@@ -30,6 +30,7 @@ export class HomePage implements OnInit, OnDestroy {
   subscription: Subscription;
   sendForm: FormGroup;
   sendFormSubmitted = false;
+  loading;
 
   constructor(
     private userService: UserService,
@@ -40,6 +41,7 @@ export class HomePage implements OnInit, OnDestroy {
     private iab: InAppBrowser,
     private popoverController: PopoverController,
     private formBuilder: FormBuilder,
+    private loadingController: LoadingController,
   ) {}
 
   ngOnInit() {
@@ -57,11 +59,26 @@ export class HomePage implements OnInit, OnDestroy {
       address: ['', [Validators.required, Validators.minLength(30)]],
     });
 
+    this.presentLoading();
     this.refresh(null);
   }
 
   ngOnDestroy() {
     console.log('HomePage onDestroy');
+  }
+
+  async presentLoading() {
+    this.loading = await this.loadingController.create({
+      cssClass: 'loading',
+      message: 'Loading...',
+    });
+    await this.loading.present();
+  }
+
+  dismissLoading() {
+    if (this.loading) {
+      this.loading.dismiss();
+    }
   }
 
   ionViewWillLeave() {
@@ -103,11 +120,13 @@ export class HomePage implements OnInit, OnDestroy {
           this.transactions = transactions;
           this.isLoading = false;
           event?.target?.complete();
+          this.dismissLoading();
         });
     } else {
       this.isLoading = false;
       event?.target?.complete();
       console.warn('No user found. Did not refresh.');
+      this.dismissLoading();
     }
   }
 
