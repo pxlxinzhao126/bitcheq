@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { Clipboard } from '@ionic-native/clipboard/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { LoadingController, PopoverController } from '@ionic/angular';
@@ -42,6 +43,7 @@ export class HomePage implements OnInit, OnDestroy {
     private popoverController: PopoverController,
     private formBuilder: FormBuilder,
     private loadingController: LoadingController,
+    private barcodeScanner: BarcodeScanner
   ) {}
 
   ngOnInit() {
@@ -110,7 +112,6 @@ export class HomePage implements OnInit, OnDestroy {
           switchMap(() => this.userService.getTransactionByOwner()),
         )
         .subscribe((transactions: any[]) => {
-          console.log('transactions', transactions);
           if (
             this.transactions &&
             this.transactions.length < transactions.length
@@ -216,5 +217,14 @@ export class HomePage implements OnInit, OnDestroy {
         },
       );
     }
+  }
+
+  scan() {
+    this.barcodeScanner.scan().then(barcodeData => {
+      console.log('Barcode data', barcodeData);
+      this.sendForm.controls.address.setValue(barcodeData);
+    }).catch(err => {
+      console.log('Error', err);
+    });
   }
 }
