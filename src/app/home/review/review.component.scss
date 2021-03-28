@@ -1,3 +1,6 @@
+$green: #2dd36f;
+$red: #eb445a;
+
 .buttons {
     margin-top: 16px;
 }
@@ -13,4 +16,28 @@
     float: right;
     max-width: 160px;
     margin-left: 12px;
+}
+
+.send-container {
+    height: 360px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &.success {
+        background-color: $green;
+    }
+
+    &.error {
+        background-color: $red;
+    }
+
+    .sendingSuccess h3 {
+        color: white;
+    }
+
+    .sendingError h3 {
+        color: white;
+    }
 }

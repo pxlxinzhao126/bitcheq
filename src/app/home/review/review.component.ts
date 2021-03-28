@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { NavParams } from '@ionic/angular';
 import { SendSevice } from 'src/app/serivce/send.service';
 
 @Component({
@@ -16,6 +15,10 @@ export class ReviewComponent implements OnInit {
   @Input()
   dismiss = () => {};
 
+  sending = false;
+  sendingSuccess = false;
+  sendingError = false;
+
   constructor(private router: Router,
     private sendSerivce: SendSevice,
     ) {
@@ -30,6 +33,10 @@ export class ReviewComponent implements OnInit {
 
   confirm() {
     console.log(`send ${this.amount} to ${this.address}`);
+    this.sending = true;
+    setTimeout(() => {
+      this.sendingSuccess = true;
+    }, 2000);
   }
 
   private withdraw(amount: any, address: any) {
