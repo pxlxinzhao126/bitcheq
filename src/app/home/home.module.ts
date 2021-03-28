@@ -7,6 +7,7 @@ import { QRCodeModule } from 'angularx-qrcode';
 import { TransactionModule } from '../transaction/transaction.module';
 import { HomePageRoutingModule } from './home-routing.module';
 import { HomePage } from './home.page';
+import { ReviewComponent } from './review/review.component';
 import { TestnetComponent } from './testnet/testnet.component';
 import { TooltipComponent } from './tooltip/tooltip.component';
 
@@ -20,7 +21,7 @@ import { TooltipComponent } from './tooltip/tooltip.component';
     TransactionModule,
     ReactiveFormsModule,
   ],
-  declarations: [HomePage, TooltipComponent, TestnetComponent],
+  declarations: [HomePage, TooltipComponent, TestnetComponent, ReviewComponent],
   providers: [
     BarcodeScanner,
   ]

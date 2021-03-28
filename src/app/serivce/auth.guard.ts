@@ -10,7 +10,6 @@ export class AuthGuardService implements CanActivate {
   ) {}
   canActivate(): boolean {
     const currentUser = this.firebaseService.getCurrentUser();
-    console.log('AuthGuardService currentUser', currentUser);
     if (!currentUser) {
       this.router.navigate(['login']);
       return false;

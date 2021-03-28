@@ -1,0 +1,32 @@
+<ion-card-header>
+  <ion-card-title>Review Send</ion-card-title>
+</ion-card-header>
+
+<ion-card-content>
+  <ion-text>
+    <div class="field-row">
+      <div>
+        <ion-text color="dark">Amount</ion-text>
+      </div>
+
+      <div class="field-value">
+        <ion-text color="medium">{{amount}}</ion-text>
+      </div>
+    </div>
+
+    <div class="field-row">
+      <div>
+        <ion-text color="dark">Address</ion-text>
+      </div>
+
+      <div class="field-value">
+        <ion-text color="medium">{{address}}</ion-text>
+      </div>
+    </div>
+  </ion-text>
+
+  <div class="buttons">
+    <ion-button color="primary" (click)="confirm()">Confirm</ion-button>
+    <ion-button color="light" (click)="cancel()">Cancel</ion-button>
+  </div>
+</ion-card-content>

@@ -11,7 +11,7 @@ import { UserService } from '../serivce/user.service';
   styleUrls: ['login.page.scss'],
 })
 export class LoginPage implements OnInit, OnDestroy {
-  email = 'pear@me.com';
+  email = 'apple3@me.com';
   password = '123456';
   password2: string;
   minLength = 6;

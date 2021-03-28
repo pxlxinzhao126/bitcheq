@@ -1,0 +1,16 @@
+.buttons {
+    margin-top: 16px;
+}
+
+.field-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 8px;
+}
+
+.field-value {
+    float: right;
+    max-width: 160px;
+    margin-left: 12px;
+}

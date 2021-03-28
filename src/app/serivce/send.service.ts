@@ -16,7 +16,13 @@ export class SendSevice {
 
   withdraw(amount: number, toAddress: string) {
     return this.httpClient.post(`${environment.apiEndpoint}/block/withdraw`, {
-      username: this.getCurrentUserEmail(),
+      amount,
+      toAddress,
+    });
+  }
+
+  estimate(amount: number, toAddress: string) {
+    return this.httpClient.post(`${environment.apiEndpoint}/block/estimate`, {
       amount,
       toAddress,
     });

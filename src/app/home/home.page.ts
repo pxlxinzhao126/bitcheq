@@ -4,13 +4,14 @@ import { Router } from '@angular/router';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { Clipboard } from '@ionic-native/clipboard/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { LoadingController, PopoverController } from '@ionic/angular';
+import { LoadingController, PopoverController, ToastController } from '@ionic/angular';
 import * as moment from 'moment';
 import { interval, Subscription } from 'rxjs';
 import { startWith, switchMap } from 'rxjs/operators';
 import { SendSevice } from '../serivce/send.service';
 import { UserService } from '../serivce/user.service';
 import { TransactionService } from '../transaction/transaction.service';
+import { ReviewComponent } from './review/review.component';
 import { TestnetComponent } from './testnet/testnet.component';
 import { TooltipComponent } from './tooltip/tooltip.component';
 
@@ -35,7 +36,6 @@ export class HomePage implements OnInit, OnDestroy {
 
   constructor(
     private userService: UserService,
-    private sendSerivce: SendSevice,
     private router: Router,
     private transactionService: TransactionService,
     private clipboard: Clipboard,
@@ -43,7 +43,8 @@ export class HomePage implements OnInit, OnDestroy {
     private popoverController: PopoverController,
     private formBuilder: FormBuilder,
     private loadingController: LoadingController,
-    private barcodeScanner: BarcodeScanner
+    private barcodeScanner: BarcodeScanner,
+    private toastController: ToastController
   ) {}
 
   ngOnInit() {
@@ -196,6 +197,15 @@ export class HomePage implements OnInit, OnDestroy {
     return await popover.present();
   }
 
+  async presentReview(amount, address) {
+    const popover = await this.popoverController.create({
+      component: ReviewComponent,
+      componentProps: {amount, address, dismiss: () => {popover.dismiss()}},
+      translucent: true,
+    });
+    return await popover.present();
+  }
+
   async submitSendForm() {
     this.sendFormSubmitted = true;
 
@@ -203,14 +213,7 @@ export class HomePage implements OnInit, OnDestroy {
       const amount = this.sendForm.controls.amount.value;
       const address = this.sendForm.controls.address.value;
       console.log(`sending ${amount} to ${address}`);
-      this.sendSerivce.withdraw(+amount, address).subscribe(
-        (res) => {
-          console.log('send transaction finished');
-        },
-        (err) => {
-          console.log(err);
-        },
-      );
+      this.presentReview(amount, address);
     }
   }
 
@@ -221,5 +224,13 @@ export class HomePage implements OnInit, OnDestroy {
     }).catch(err => {
       console.log('Error', err);
     });
+  }
+
+  async sendSuccess() {
+    const toast = await this.toastController.create({
+      message: 'Send transaction completed',
+      duration: 5000
+    });
+    toast.present();
   }
 }
