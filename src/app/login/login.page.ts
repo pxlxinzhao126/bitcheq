@@ -105,17 +105,14 @@ export class LoginPage implements OnInit, OnDestroy {
   async googleSignIn() {
     try {
       const googleUser = (await Plugins.GoogleAuth.signIn()) as any;
-      console.log('googleSignIn success', googleUser);
-      await this.userService.createUserAndSignUpFirebaseIfNotExists(googleUser);
-     
-      // Sign in will fail if user register the same email with his/her own password
-      const firebaseUser = await this.firebaseService.signInWithEmailAndPassword(
-        googleUser.email,
-        googleUser.id,
-      );
-      console.log('firebase login success', firebaseUser);
 
-      this.router.navigate(['tabs', 'home']);
+      this.firebaseService.signInWithCredential(googleUser).then((res) => {
+        console.log(res);
+        this.router.navigate(['tabs', 'home']);
+      }).catch((err) => {
+        console.log(err);
+      })
+
     } catch (error) {
       console.log('googleSignIn error', error);
 

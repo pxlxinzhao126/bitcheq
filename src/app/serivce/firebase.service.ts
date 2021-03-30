@@ -1,7 +1,7 @@
-import firebase from 'firebase/app';
-import 'firebase/analytics';
-import 'firebase/auth';
 import { Injectable } from '@angular/core';
+import 'firebase/analytics';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBjCwaZ7w9FuBmR56uuF6o6V_pNSluiHoU',
@@ -38,5 +38,10 @@ export class FirebaseService {
 
   async googleSignIn() {
     return firebase.auth().signInWithPopup(googleAuthProvider);
+  }
+
+  async signInWithCredential(googleUser) {
+    const credential = firebase.auth.GoogleAuthProvider.credential(googleUser.authentication.idToken);
+    return firebase.auth().signInWithCredential(credential);
   }
 }
