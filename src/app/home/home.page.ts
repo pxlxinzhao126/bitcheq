@@ -4,7 +4,11 @@ import { Router } from '@angular/router';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { Clipboard } from '@ionic-native/clipboard/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { LoadingController, PopoverController, ToastController } from '@ionic/angular';
+import {
+  LoadingController,
+  PopoverController,
+  ToastController,
+} from '@ionic/angular';
 import * as moment from 'moment';
 import { interval, Subscription } from 'rxjs';
 import { startWith, switchMap } from 'rxjs/operators';
@@ -68,7 +72,7 @@ export class HomePage implements OnInit, OnDestroy {
     this.sendService.getTransactionSubject().subscribe((msg) => {
       console.log(`transaction complete with message`, msg);
       this.toggleSend();
-    })
+    });
   }
 
   ngOnDestroy() {
@@ -207,9 +211,13 @@ export class HomePage implements OnInit, OnDestroy {
   async presentReview(amount, address) {
     const popover = await this.popoverController.create({
       component: ReviewComponent,
-      componentProps: {amount, address, dismiss: () => {
-        popover.dismiss();
-      }},
+      componentProps: {
+        amount,
+        address,
+        dismiss: () => {
+          popover.dismiss();
+        },
+      },
       translucent: true,
     });
     return await popover.present();
@@ -227,18 +235,21 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   scan() {
-    this.barcodeScanner.scan().then(barcodeData => {
-      console.log('Barcode data', barcodeData);
-      this.sendForm.controls.address.setValue(barcodeData.text);
-    }).catch(err => {
-      console.log('Error', err);
-    });
+    this.barcodeScanner
+      .scan()
+      .then((barcodeData) => {
+        console.log('Barcode data', barcodeData);
+        this.sendForm.controls.address.setValue(barcodeData.text);
+      })
+      .catch((err) => {
+        console.log('Error', err);
+      });
   }
 
   async sendSuccess() {
     const toast = await this.toastController.create({
       message: 'Send transaction completed',
-      duration: 5000
+      duration: 5000,
     });
     toast.present();
   }

@@ -49,8 +49,6 @@ export class TransactionComponent implements OnInit, OnDestroy {
 
   viewTx(event) {
     event.preventDefault();
-    this.iab.create(
-      `https://sochain.com/tx/BTCTEST/${this.tx?.txid}`,
-    );
+    this.iab.create(`https://sochain.com/tx/BTCTEST/${this.tx?.txid}`);
   }
 }

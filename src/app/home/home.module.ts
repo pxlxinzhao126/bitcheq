@@ -22,8 +22,6 @@ import { TooltipComponent } from './tooltip/tooltip.component';
     ReactiveFormsModule,
   ],
   declarations: [HomePage, TooltipComponent, TestnetComponent, ReviewComponent],
-  providers: [
-    BarcodeScanner,
-  ]
+  providers: [BarcodeScanner],
 })
 export class HomeModule {}

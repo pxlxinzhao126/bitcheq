@@ -15,11 +15,7 @@ export class UserService {
   }
 
   getTransactionByOwner() {
-    return this.httpClient.get(
-      `${
-        environment.apiEndpoint
-      }/transactions`,
-    );
+    return this.httpClient.get(`${environment.apiEndpoint}/transactions`);
   }
 
   createUser(email: string) {
@@ -29,19 +25,11 @@ export class UserService {
   }
 
   getUser(email) {
-    return this.httpClient
-      .get(`${environment.apiEndpoint}/users`)
-      .toPromise();
+    return this.httpClient.get(`${environment.apiEndpoint}/users`).toPromise();
   }
 
   refreshCurrentUser() {
-    return this.httpClient
-      .get(
-        `${
-          environment.apiEndpoint
-        }/users`,
-      )
-      .toPromise();
+    return this.httpClient.get(`${environment.apiEndpoint}/users`).toPromise();
   }
 
   verifyEmail() {
@@ -52,11 +40,7 @@ export class UserService {
 
   getAddress() {
     return this.httpClient
-      .get(
-        `${
-          environment.apiEndpoint
-        }/block/address`,
-      )
+      .get(`${environment.apiEndpoint}/block/address`)
       .toPromise();
   }
 

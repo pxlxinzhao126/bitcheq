@@ -22,10 +22,7 @@ export class ReviewComponent implements OnInit {
   estimation = 0;
   estimationStatus = 'unknown';
 
-  constructor(private router: Router,
-    private sendSerivce: SendService,
-    ) {
-   }
+  constructor(private router: Router, private sendSerivce: SendService) {}
 
   ngOnInit() {
     this.estimate();
@@ -63,12 +60,10 @@ export class ReviewComponent implements OnInit {
           console.log('this.estimation', this.estimation);
           console.log('this.estimationStatus', this.estimationStatus);
         }
-
-
       },
       (err) => {
         console.log(err);
-      }
+      },
     );
   }
 
@@ -82,11 +77,11 @@ export class ReviewComponent implements OnInit {
         console.log(err);
         this.sendingError = true;
         this.sendSerivce.broadcast('error');
-      }
+      },
     );
   }
 
   private getPriceImpact() {
-    return Math.round(this.estimation/+this.amount * 100 * 100)/100 + '%';
+    return Math.round((this.estimation / +this.amount) * 100 * 100) / 100 + '%';
   }
 }

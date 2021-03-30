@@ -41,7 +41,9 @@ export class FirebaseService {
   }
 
   async signInWithCredential(googleUser) {
-    const credential = firebase.auth.GoogleAuthProvider.credential(googleUser.authentication.idToken);
+    const credential = firebase.auth.GoogleAuthProvider.credential(
+      googleUser.authentication.idToken,
+    );
     return firebase.auth().signInWithCredential(credential);
   }
 }

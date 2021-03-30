@@ -8,9 +8,7 @@ import { FirebaseService } from './firebase.service';
 export class SendService {
   private transactionSubject = new Subject<any>();
 
-  constructor(
-    private httpClient: HttpClient
-  ) {}
+  constructor(private httpClient: HttpClient) {}
 
   broadcast(msg) {
     this.transactionSubject.next({ text: msg });

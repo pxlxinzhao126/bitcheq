@@ -25,7 +25,6 @@ export class LoginPage implements OnInit, OnDestroy {
     'auth/user-not-found',
     'auth/too-many-requests',
   ];
-  gmailUsed = false;
 
   constructor(
     private firebaseService: FirebaseService,
@@ -103,26 +102,16 @@ export class LoginPage implements OnInit, OnDestroy {
   }
 
   async googleSignIn() {
-    try {
-      const googleUser = (await Plugins.GoogleAuth.signIn()) as any;
+    const googleUser = (await Plugins.GoogleAuth.signIn()) as any;
 
-      this.firebaseService.signInWithCredential(googleUser).then((res) => {
-        console.log(res);
+    this.firebaseService
+      .signInWithCredential(googleUser)
+      .then(() => {
         this.router.navigate(['tabs', 'home']);
-      }).catch((err) => {
-        console.log(err);
       })
-
-    } catch (error) {
-      console.log('googleSignIn error', error);
-
-      if (error.code === 'auth/wrong-password') {
-        console.log(
-          `Gmail user is already registered, please use email and password to login.`,
-        );
-        this.gmailUsed = true;
-      }
-    }
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   isValidEmail() {
@@ -134,7 +123,6 @@ export class LoginPage implements OnInit, OnDestroy {
   clearError() {
     this.submitted = false;
     this.errorCode = null;
-    this.gmailUsed = false;
   }
 
   isUnknownError() {

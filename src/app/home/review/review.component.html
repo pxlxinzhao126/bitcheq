@@ -2,26 +2,26 @@
   <ion-card-header>
     <ion-card-title>Review Send</ion-card-title>
   </ion-card-header>
-  
+
   <ion-card-content>
     <ion-text>
       <div class="field-row">
         <div class="field-label">
           <ion-text color="dark">Amount</ion-text>
         </div>
-  
+
         <div class="field-value">
-          <ion-text color="medium">{{amount}}</ion-text>
+          <ion-text color="medium">{{ amount }}</ion-text>
         </div>
       </div>
-  
+
       <div class="field-row">
         <div class="field-label">
           <ion-text color="dark">Address</ion-text>
         </div>
-  
+
         <div class="field-value">
-          <ion-text color="medium">{{address}}</ion-text>
+          <ion-text color="medium">{{ address }}</ion-text>
         </div>
       </div>
 
@@ -29,9 +29,11 @@
         <div class="field-label">
           <ion-text color="dark">Network Fee</ion-text>
         </div>
-  
+
         <div class="field-value">
-          <ion-text color="medium">{{estimation}} ({{getPriceImpact()}})</ion-text>
+          <ion-text color="medium"
+            >{{ estimation }} ({{ getPriceImpact() }})</ion-text
+          >
         </div>
       </div>
 
@@ -41,28 +43,49 @@
         </div>
       </div>
     </ion-text>
-  
+
     <div class="buttons">
-      <ion-button color="primary" (click)="confirm()" [disabled]="estimationStatus !== 'success'">Confirm</ion-button>
+      <ion-button
+        color="primary"
+        (click)="confirm()"
+        [disabled]="estimationStatus !== 'success'"
+        >Confirm</ion-button
+      >
       <ion-button color="light" (click)="cancel()">Cancel</ion-button>
     </div>
   </ion-card-content>
 </div>
 
-<div *ngIf="sending" [ngClass]="{'send-container': true, 'success': sendingSuccess, 'error': sendingError}">
-  <div *ngIf="!sendingSuccess && !sendingError" class="animate__animated animate__pulse animate__infinite">
+<div
+  *ngIf="sending"
+  [ngClass]="{
+    'send-container': true,
+    success: sendingSuccess,
+    error: sendingError
+  }"
+>
+  <div
+    *ngIf="!sendingSuccess && !sendingError"
+    class="animate__animated animate__pulse animate__infinite"
+  >
     <ion-text>
       <h3>Sending</h3>
     </ion-text>
   </div>
 
-  <div *ngIf="sendingSuccess" class="sendingSuccess animate__animated animate__wobble">
+  <div
+    *ngIf="sendingSuccess"
+    class="sendingSuccess animate__animated animate__wobble"
+  >
     <ion-text>
       <h3>Success</h3>
     </ion-text>
   </div>
 
-  <div *ngIf="sendingError" class="sendingError animate__animated animate__wobble">
+  <div
+    *ngIf="sendingError"
+    class="sendingError animate__animated animate__wobble"
+  >
     <ion-text>
       <h3>Error</h3>
     </ion-text>
