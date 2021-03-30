@@ -6,7 +6,7 @@
   <ion-card-content>
     <ion-text>
       <div class="field-row">
-        <div>
+        <div class="field-label">
           <ion-text color="dark">Amount</ion-text>
         </div>
   
@@ -16,7 +16,7 @@
       </div>
   
       <div class="field-row">
-        <div>
+        <div class="field-label">
           <ion-text color="dark">Address</ion-text>
         </div>
   
@@ -24,10 +24,26 @@
           <ion-text color="medium">{{address}}</ion-text>
         </div>
       </div>
+
+      <div class="field-row">
+        <div class="field-label">
+          <ion-text color="dark">Network Fee</ion-text>
+        </div>
+  
+        <div class="field-value">
+          <ion-text color="medium">{{estimation}} ({{getPriceImpact()}})</ion-text>
+        </div>
+      </div>
+
+      <div class="field-row" *ngIf="estimationStatus === 'fail'">
+        <div>
+          <ion-text color="danger">Not enough balance</ion-text>
+        </div>
+      </div>
     </ion-text>
   
     <div class="buttons">
-      <ion-button color="primary" (click)="confirm()">Confirm</ion-button>
+      <ion-button color="primary" (click)="confirm()" [disabled]="estimationStatus !== 'success'">Confirm</ion-button>
       <ion-button color="light" (click)="cancel()">Cancel</ion-button>
     </div>
   </ion-card-content>

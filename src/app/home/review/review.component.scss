@@ -14,8 +14,13 @@ $red: #eb445a;
 
 .field-value {
     float: right;
-    max-width: 160px;
+    max-width: 120px;
     margin-left: 12px;
+    text-align: right;
+}
+
+.field-label {
+    min-width: 80px;
 }
 
 .send-container {
