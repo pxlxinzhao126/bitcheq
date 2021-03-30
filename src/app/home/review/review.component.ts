@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { SendSevice } from 'src/app/serivce/send.service';
+import { SendService } from 'src/app/serivce/send.service';
 
 @Component({
   selector: 'app-review',
@@ -20,7 +20,7 @@ export class ReviewComponent implements OnInit {
   sendingError = false;
 
   constructor(private router: Router,
-    private sendSerivce: SendSevice,
+    private sendSerivce: SendService,
     ) {
    }
 
@@ -34,18 +34,25 @@ export class ReviewComponent implements OnInit {
   confirm() {
     console.log(`send ${this.amount} to ${this.address}`);
     this.sending = true;
-    setTimeout(() => {
-      this.sendingSuccess = true;
-    }, 2000);
+
+    // setTimeout(() => {
+    //   this.sendingSuccess = true;
+    //   this.sendSerivce.broadcast('success');
+    // }, 2000);
+
+    this.withdraw();
   }
 
-  private withdraw(amount: any, address: any) {
-    this.sendSerivce.withdraw(+amount, address).subscribe(
+  private withdraw() {
+    this.sendSerivce.withdraw(+this.amount, this.address).subscribe(
       (res) => {
-        console.log('send transaction finished');
+        this.sendingSuccess = true;
+        this.sendSerivce.broadcast('success');
       },
       (err) => {
         console.log(err);
+        this.sendingError = true;
+        this.sendSerivce.broadcast('error');
       }
     );
   }

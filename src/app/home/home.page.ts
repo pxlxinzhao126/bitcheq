@@ -8,12 +8,12 @@ import { LoadingController, PopoverController, ToastController } from '@ionic/an
 import * as moment from 'moment';
 import { interval, Subscription } from 'rxjs';
 import { startWith, switchMap } from 'rxjs/operators';
-import { SendSevice } from '../serivce/send.service';
 import { UserService } from '../serivce/user.service';
 import { TransactionService } from '../transaction/transaction.service';
 import { ReviewComponent } from './review/review.component';
 import { TestnetComponent } from './testnet/testnet.component';
 import { TooltipComponent } from './tooltip/tooltip.component';
+import { SendService } from '../serivce/send.service';
 
 @Component({
   selector: 'app-home',
@@ -44,7 +44,8 @@ export class HomePage implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private loadingController: LoadingController,
     private barcodeScanner: BarcodeScanner,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private sendService: SendService,
   ) {}
 
   ngOnInit() {
@@ -63,6 +64,11 @@ export class HomePage implements OnInit, OnDestroy {
     });
 
     this.presentLoading();
+
+    this.sendService.getTransactionSubject().subscribe((msg) => {
+      console.log(`transaction complete with message`, msg);
+      this.toggleSend();
+    })
   }
 
   ngOnDestroy() {
@@ -145,6 +151,7 @@ export class HomePage implements OnInit, OnDestroy {
     this.showAddress = false;
     this.showSend = !this.showSend;
     this.sendFormSubmitted = false;
+    this.sendForm.controls.amount.setValue('');
     this.sendForm.controls.address.setValue('');
   }
 
@@ -200,7 +207,9 @@ export class HomePage implements OnInit, OnDestroy {
   async presentReview(amount, address) {
     const popover = await this.popoverController.create({
       component: ReviewComponent,
-      componentProps: {amount, address, dismiss: () => {popover.dismiss()}},
+      componentProps: {amount, address, dismiss: () => {
+        popover.dismiss();
+      }},
       translucent: true,
     });
     return await popover.present();

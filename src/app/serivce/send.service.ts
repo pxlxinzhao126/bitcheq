@@ -1,17 +1,23 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { FirebaseService } from './firebase.service';
 
 @Injectable({ providedIn: 'root' })
-export class SendSevice {
+export class SendService {
+  private transactionSubject = new Subject<any>();
+
   constructor(
-    private httpClient: HttpClient,
-    private firebaseService: FirebaseService,
+    private httpClient: HttpClient
   ) {}
 
-  private getCurrentUserEmail() {
-    return this.firebaseService.getCurrentUser().email;
+  broadcast(msg) {
+    this.transactionSubject.next({ text: msg });
+  }
+
+  getTransactionSubject() {
+    return this.transactionSubject.asObservable();
   }
 
   withdraw(amount: number, toAddress: string) {
